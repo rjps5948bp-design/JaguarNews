@@ -1,0 +1,23 @@
+{
+  "hero_tag": "Breaking",
+  "headline": "Headline placeholder: Jaguars take the lead on opening week",
+  "byline": "By Staff Writer \u00b7 September 11, 2026 \u00b7 News",
+  "lede": "Dummy lede paragraph. This is placeholder content describing the top story of the week \u2014 replace with a real summary once the first issue is written.",
+  "stories": [
+    {
+      "category": "Sports",
+      "title": "Placeholder headline about the fall sports season",
+      "excerpt": "Dummy content: short excerpt goes here summarizing the article in two sentences of placeholder text."
+    },
+    {
+      "category": "Opinion",
+      "title": "Placeholder headline about a student opinion piece",
+      "excerpt": "Dummy content: short excerpt goes here summarizing the article in two sentences of placeholder text."
+    },
+    {
+      "category": "Features",
+      "title": "Placeholder headline about a student or club feature",
+      "excerpt": "Dummy content: short excerpt goes here summarizing the article in two sentences of placeholder text."
+    }
+  ]
+}

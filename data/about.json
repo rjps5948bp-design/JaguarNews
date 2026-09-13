@@ -1,0 +1,24 @@
+{
+  "lede": "Placeholder mission statement. Jaguar News is the student-produced news outlet of TLC La Mesa, covering campus life, sports, opinion, and culture across print, podcast, video, and photography. Replace this paragraph with your real about-us copy.",
+  "mission": "Dummy text describing why the program exists and who it serves. Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+  "how_we_report": "Dummy text describing the class's reporting process, from pitch to publish. Lorem ipsum dolor sit amet, consectetur.",
+  "get_involved": "Dummy text inviting students to join the class, pitch a story, or send a tip. Lorem ipsum dolor sit amet, consectetur.",
+  "team": [
+    {
+      "role": "Editor-in-Chief",
+      "name": "Student Name"
+    },
+    {
+      "role": "Managing Editor",
+      "name": "Student Name"
+    },
+    {
+      "role": "Podcast Host",
+      "name": "Student Name"
+    },
+    {
+      "role": "Photo Editor",
+      "name": "Student Name"
+    }
+  ]
+}

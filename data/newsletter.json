@@ -1,0 +1,25 @@
+{
+  "lede": "Placeholder intro copy: a short weekly roundup of the top stories, upcoming events, and staff picks from the Jaguar News team.",
+  "issues": [
+    {
+      "number": "04",
+      "title": "Placeholder headline about homecoming week",
+      "date": "Sept 5, 2026"
+    },
+    {
+      "number": "03",
+      "title": "Placeholder headline about the new cafeteria menu",
+      "date": "Aug 29, 2026"
+    },
+    {
+      "number": "02",
+      "title": "Placeholder headline about fall sports tryouts",
+      "date": "Aug 22, 2026"
+    },
+    {
+      "number": "01",
+      "title": "Placeholder headline welcoming students back to campus",
+      "date": "Aug 15, 2026"
+    }
+  ]
+}

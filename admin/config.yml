@@ -1,0 +1,124 @@
+backend:
+  name: github
+  repo: YOUR-GITHUB-USERNAME/YOUR-REPO-NAME   # <-- edit this
+  branch: main
+
+# Sveltia CMS reads/writes plain JSON when the file collection format is "json"
+media_folder: "assets/uploads"
+public_folder: "assets/uploads"
+
+collections:
+  - name: "home"
+    label: "Home Page"
+    files:
+      - name: "home"
+        label: "Home"
+        file: "data/index.json"
+        fields:
+          - {label: "Tag (e.g. Breaking)", name: "hero_tag", widget: "string"}
+          - {label: "Headline", name: "headline", widget: "string"}
+          - {label: "Byline", name: "byline", widget: "string"}
+          - {label: "Lede paragraph", name: "lede", widget: "text"}
+          - label: "Latest Stories (3 cards)"
+            name: "stories"
+            widget: "list"
+            fields:
+              - {label: "Category", name: "category", widget: "string"}
+              - {label: "Title", name: "title", widget: "string"}
+              - {label: "Excerpt", name: "excerpt", widget: "text"}
+
+  - name: "about"
+    label: "About Us Page"
+    files:
+      - name: "about"
+        label: "About"
+        file: "data/about.json"
+        fields:
+          - {label: "Intro paragraph", name: "lede", widget: "text"}
+          - {label: "Our mission", name: "mission", widget: "text"}
+          - {label: "How we report", name: "how_we_report", widget: "text"}
+          - {label: "Get involved", name: "get_involved", widget: "text"}
+          - label: "Team (4 cards)"
+            name: "team"
+            widget: "list"
+            fields:
+              - {label: "Role", name: "role", widget: "string"}
+              - {label: "Name", name: "name", widget: "string"}
+
+  - name: "newsletter"
+    label: "Newsletter Page"
+    files:
+      - name: "newsletter"
+        label: "Newsletter"
+        file: "data/newsletter.json"
+        fields:
+          - {label: "Intro paragraph", name: "lede", widget: "text"}
+          - label: "Past Issues"
+            name: "issues"
+            widget: "list"
+            fields:
+              - {label: "Issue number", name: "number", widget: "string"}
+              - {label: "Title", name: "title", widget: "string"}
+              - {label: "Date", name: "date", widget: "string"}
+
+  - name: "podcast"
+    label: "Podcast Page"
+    files:
+      - name: "podcast"
+        label: "Podcast"
+        file: "data/podcast.json"
+        fields:
+          - {label: "Show description", name: "lede", widget: "text"}
+          - label: "Episodes"
+            name: "episodes"
+            widget: "list"
+            fields:
+              - {label: "Episode number", name: "number", widget: "string"}
+              - {label: "Title", name: "title", widget: "string"}
+              - {label: "Description", name: "description", widget: "text"}
+              - {label: "Length (e.g. 24 min)", name: "length", widget: "string"}
+
+  - name: "articles"
+    label: "Articles Page"
+    files:
+      - name: "articles"
+        label: "Articles"
+        file: "data/articles.json"
+        fields:
+          - {label: "Intro paragraph", name: "lede", widget: "text"}
+          - label: "Articles"
+            name: "articles"
+            widget: "list"
+            fields:
+              - {label: "Category", name: "category", widget: "string"}
+              - {label: "Title", name: "title", widget: "string"}
+              - {label: "Excerpt", name: "excerpt", widget: "text"}
+
+  - name: "videos"
+    label: "Videos Page"
+    files:
+      - name: "videos"
+        label: "Videos"
+        file: "data/videos.json"
+        fields:
+          - {label: "Intro paragraph", name: "lede", widget: "text"}
+          - label: "Videos"
+            name: "videos"
+            widget: "list"
+            fields:
+              - {label: "Title", name: "title", widget: "string"}
+              - {label: "Length (e.g. 3:42)", name: "length", widget: "string"}
+
+  - name: "gallery"
+    label: "Photo Gallery Page"
+    files:
+      - name: "gallery"
+        label: "Gallery"
+        file: "data/gallery.json"
+        fields:
+          - {label: "Intro paragraph", name: "lede", widget: "text"}
+          - label: "Photos"
+            name: "photos"
+            widget: "list"
+            fields:
+              - {label: "Caption", name: "caption", widget: "string"}
