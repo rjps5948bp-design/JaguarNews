@@ -5,7 +5,7 @@ backend:
 
 # Sveltia CMS reads/writes plain JSON when the file collection format is "json"
 media_folder: "assets/uploads"
-public_folder: "assets/uploads"
+public_folder: "/JaguarNews/assets/uploads"
 
 collections:
   - name: "home"
