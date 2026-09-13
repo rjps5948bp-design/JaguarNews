@@ -1,6 +1,6 @@
 backend:
   name: github
-  repo: rjps5948-design/JaguarNews   # <-- edit this
+  repo: rjps5948bp-design/JaguarNews   # <-- edit this
   branch: main
 
 # Sveltia CMS reads/writes plain JSON when the file collection format is "json"
