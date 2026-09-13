@@ -10,6 +10,28 @@
   const page = document.body.dataset.page;
   if (!page) return;
 
+  // turns a pasted YouTube URL (any common format) or a bare video ID into an embed URL
+  function youtubeEmbedUrl(input) {
+    if (!input) return null;
+    const m = String(input).match(
+      /(?:youtu\.be\/|youtube\.com\/(?:watch\?v=|embed\/|shorts\/))([\w-]{11})/
+    );
+    const id = m ? m[1] : (/^[\w-]{11}$/.test(input) ? input : null);
+    return id ? `https://www.youtube.com/embed/${id}` : null;
+  }
+
+  function videoEmbedHtml(url, label) {
+    const embed = youtubeEmbedUrl(url);
+    if (embed) {
+      return `<div class="ph r-16-9" style="border:2px solid var(--ink,#1b1b1b);padding:0;overflow:hidden">
+        <iframe style="width:100%;height:100%;border:0" src="${embed}"
+          title="${esc(label || 'Video')}" allowfullscreen
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"></iframe>
+      </div>`;
+    }
+    return `<div class="ph r-16-9" data-label="VIDEO THUMBNAIL"></div>`;
+  }
+
   const templates = {
     "story-card": (s) => `
       <div class="ph r-3-2" data-label="IMAGE 600×400"></div>
@@ -47,13 +69,14 @@
         <p class="byline" style="margin-bottom:0">Staff Writer<span class="dot">·</span>Sept 2026</p>
       </div>`,
     "video-card": (v) => `
-      <div class="ph r-16-9" data-label="VIDEO THUMBNAIL"></div>
+      ${videoEmbedHtml(v.youtube_url, v.title)}
       <div class="card-body">
         <h3>${esc(v.title)}</h3>
         <p class="byline" style="margin-bottom:0">${esc(v.length)}<span class="dot">·</span>Sept 2026</p>
       </div>`,
     "gallery-figure": (p) => `
-      <div class="ph r-4-3" data-label="PHOTO 800×600"></div>
+      ${p.image ? `<img src="${esc(p.image)}" alt="${esc(p.caption || "")}" style="width:100%;display:block;border-bottom:1.5px solid #1b1b1b">`
+                 : `<div class="ph r-4-3" data-label="PHOTO 800×600"></div>`}
       <figcaption>${esc(p.caption)}</figcaption>`,
   };
 
@@ -70,6 +93,17 @@
       document.querySelectorAll("[data-field]").forEach((el) => {
         const key = el.dataset.field;
         if (data[key] != null) el.textContent = data[key];
+      });
+      // single embeddable field (e.g. the featured YouTube video)
+      document.querySelectorAll("[data-embed]").forEach((el) => {
+        const key = el.dataset.embed;
+        const embed = youtubeEmbedUrl(data[key]);
+        if (embed) {
+          el.outerHTML = `<div class="ph r-16-9" style="border:2px solid var(--ink,#1b1b1b);padding:0;overflow:hidden;margin-bottom:40px">
+            <iframe style="width:100%;height:100%;border:0" src="${embed}" title="Featured video" allowfullscreen
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"></iframe>
+          </div>`;
+        }
       });
       // repeating lists
       document.querySelectorAll("[data-list]").forEach((el) => {
