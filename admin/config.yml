@@ -1,6 +1,6 @@
 backend:
   name: github
-  repo: rjps5948bp-design/JaguarNews   # <-- edit this
+  repo: YOUR-GITHUB-USERNAME/YOUR-REPO-NAME   # <-- edit this
   branch: main
 
 # Sveltia CMS reads/writes plain JSON when the file collection format is "json"
@@ -102,12 +102,14 @@ collections:
         file: "data/videos.json"
         fields:
           - {label: "Intro paragraph", name: "lede", widget: "text"}
+          - {label: "Featured video (paste a YouTube link)", name: "featured_video_url", widget: "string", required: false}
           - label: "Videos"
             name: "videos"
             widget: "list"
             fields:
               - {label: "Title", name: "title", widget: "string"}
               - {label: "Length (e.g. 3:42)", name: "length", widget: "string"}
+              - {label: "YouTube link (paste the video URL)", name: "youtube_url", widget: "string", required: false}
 
   - name: "gallery"
     label: "Photo Gallery Page"
@@ -121,4 +123,5 @@ collections:
             name: "photos"
             widget: "list"
             fields:
+              - {label: "Photo", name: "image", widget: "image", required: false}
               - {label: "Caption", name: "caption", widget: "string"}
