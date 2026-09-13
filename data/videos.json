@@ -1,29 +1,36 @@
 {
   "lede": "Placeholder intro: video packages, interviews, and recaps produced by the Jaguar News broadcast team.",
+  "featured_video_url": "",
   "videos": [
     {
-      "title": "Placeholder",
-      "length": "3:42"
+      "title": "Placeholder recap of last week's home game",
+      "length": "3:42",
+      "youtube_url": ""
     },
     {
-      "title": "Placeholder",
-      "length": "2:15"
+      "title": "Placeholder campus tour of the new science wing",
+      "length": "2:15",
+      "youtube_url": ""
     },
     {
-      "title": "Placeholder",
-      "length": "5:08"
+      "title": "Placeholder interview with the student council president",
+      "length": "5:08",
+      "youtube_url": ""
     },
     {
-      "title": "Placeholder",
-      "length": "4:01"
+      "title": "Placeholder behind-the-scenes at the fall play rehearsal",
+      "length": "4:01",
+      "youtube_url": ""
     },
     {
-      "title": "Placeholder",
-      "length": "2:50"
+      "title": "Placeholder highlight reel from spirit week",
+      "length": "2:50",
+      "youtube_url": ""
     },
     {
-      "title": "Placeholder",
-      "length": "3:19"
+      "title": "Placeholder \"ask a senior\" advice segment",
+      "length": "3:19",
+      "youtube_url": ""
     }
   ]
 }
