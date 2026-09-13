@@ -1,23 +1,23 @@
 {
-  "lede": "Placeholder show description: a student-hosted podcast covering campus news, interviews, and the occasional off-topic tangent \u2014 new episodes dropping every other Thursday.",
+  "lede": "Placeholder show description: a student-hosted podcast covering campus news, interviews, and the occasional off-topic tangent — new episodes dropping every other Thursday.",
   "episodes": [
     {
-      "number": "12",
-      "title": "Placeholder episode title about the new student council",
+      "number": "1",
+      "title": "Placeholder episode title",
       "description": "Placeholder description of what this episode covers",
-      "length": "24 min"
+      "length": "-- min"
     },
     {
-      "number": "11",
-      "title": "Placeholder episode title interviewing a school coach",
+      "number": "2",
+      "title": "Placeholder episode title",
       "description": "Placeholder description of what this episode covers",
-      "length": "31 min"
+      "length": "-- min"
     },
     {
-      "number": "10",
+      "number": "3",
       "title": "Placeholder episode title recapping the first week back",
       "description": "Placeholder description of what this episode covers",
-      "length": "19 min"
+      "length": "-- min"
     }
   ]
 }
