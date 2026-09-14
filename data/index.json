@@ -5,11 +5,6 @@
   "lede": "Dummy lede paragraph. This is placeholder content describing the top story of the week — replace with a real summary once the first issue is written.",
   "stories": [
     {
-      "category": "Opinion",
-      "title": "Placeholder headline about a student opinion piece",
-      "excerpt": "Dummy content: short excerpt goes here summarizing the article in two sentences of placeholder text."
-    },
-    {
       "category": "Features",
       "title": "Placeholder headline about a student or club feature",
       "excerpt": "Dummy content: short excerpt goes here summarizing the article in two sentences of placeholder text."
