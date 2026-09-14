@@ -53,8 +53,10 @@ collections:
             summary: "{{title}}"
             fields:
               - {label: "Department name", name: "title", widget: "string"}
-              - {label: "Photo of the person in charge", name: "photo", widget: "image", required: false}
-              - {label: "Description", name: "description", widget: "text"}
+              - {label: "Department description", name: "description", widget: "text"}
+              - {label: "Leader's photo", name: "leader_photo", widget: "image", required: false}
+              - {label: "Leader's name", name: "leader_name", widget: "string"}
+              - {label: "Leader's short description", name: "leader_bio", widget: "text"}
 
   - name: "newsletter"
     label: "Newsletter Page"
