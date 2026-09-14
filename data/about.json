@@ -8,19 +8,19 @@
       "role": "Editor-in-Chief",
       "name": "Student Name",
       "photo": "",
-      "description": "Placeholder description of the Editor-in-Chief — their role on staff and a short background."
+      "description": "Placeholder description of the Editor-in-Chief \u2014 their role on staff and a short background."
     },
     {
       "role": "Assistant Editor",
       "name": "Student Name",
       "photo": "",
-      "description": "Placeholder description of the Assistant Editor — their role on staff and a short background."
+      "description": "Placeholder description of the Assistant Editor \u2014 their role on staff and a short background."
     },
     {
       "role": "Teacher / Advisor",
       "name": "Teacher Name",
       "photo": "",
-      "description": "Placeholder description of the teacher advising the program — their background and role."
+      "description": "Placeholder description of the teacher advising the program \u2014 their background and role."
     }
   ],
   "departments": [
@@ -28,6 +28,7 @@
       "title": "Placeholder Department Name",
       "description": "Placeholder description of what this department covers and produces.",
       "leader_photo": "",
+      "leader_title": "Head of Placeholder",
       "leader_name": "Student Name",
       "leader_bio": "Placeholder short description of the department leader."
     },
@@ -35,6 +36,7 @@
       "title": "Placeholder Department Name",
       "description": "Placeholder description of what this department covers and produces.",
       "leader_photo": "",
+      "leader_title": "Head of Placeholder",
       "leader_name": "Student Name",
       "leader_bio": "Placeholder short description of the department leader."
     },
@@ -42,6 +44,7 @@
       "title": "Placeholder Department Name",
       "description": "Placeholder description of what this department covers and produces.",
       "leader_photo": "",
+      "leader_title": "Head of Placeholder",
       "leader_name": "Student Name",
       "leader_bio": "Placeholder short description of the department leader."
     },
@@ -49,6 +52,7 @@
       "title": "Placeholder Department Name",
       "description": "Placeholder description of what this department covers and produces.",
       "leader_photo": "",
+      "leader_title": "Head of Placeholder",
       "leader_name": "Student Name",
       "leader_bio": "Placeholder short description of the department leader."
     },
@@ -56,6 +60,7 @@
       "title": "Placeholder Department Name",
       "description": "Placeholder description of what this department covers and produces.",
       "leader_photo": "",
+      "leader_title": "Head of Placeholder",
       "leader_name": "Student Name",
       "leader_bio": "Placeholder short description of the department leader."
     },
@@ -63,6 +68,7 @@
       "title": "Placeholder Department Name",
       "description": "Placeholder description of what this department covers and produces.",
       "leader_photo": "",
+      "leader_title": "Head of Placeholder",
       "leader_name": "Student Name",
       "leader_bio": "Placeholder short description of the department leader."
     }
