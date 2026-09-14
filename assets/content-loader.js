@@ -70,7 +70,7 @@
     "department-row": (d) => `
       <div class="department-photo">
         ${d.photo ? `<img src="${esc(d.photo)}" alt="${esc(d.title || "")}">`
-                   : `<div class="ph r-3-1" data-label="PHOTO"></div>`}
+                   : `<div class="ph r-1-1" data-label="PHOTO"></div>`}
       </div>
       <div class="department-body">
         <h3>${esc(d.title)}</h3>
