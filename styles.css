@@ -547,31 +547,42 @@ section.block.alt{ background:var(--white); border-top:1px solid var(--line); bo
 .leadership-body h3{ margin-bottom:.35em; }
 .leadership-body p:last-child{ margin-bottom:0; color:#444; }
 
-/* ---------- About page: Our Departments (round photo left, title + description right) ---------- */
+/* ---------- About page: Our Departments (title + description, then a leader sub-row) ---------- */
 .department-list{ display:flex; flex-direction:column; gap:22px; }
 .department-row{
-  display:grid;
-  grid-template-columns:220px 1fr;
-  gap:28px;
-  align-items:center;
   border:1.5px solid var(--ink);
   background:var(--white);
-  padding:24px;
+  padding:26px 26px 24px;
 }
-.department-photo img{
+.department-row h3{
+  font-size:clamp(1.5rem, 2.6vw, 2.1rem);
+  margin-bottom:.3em;
+}
+.department-desc{ color:#444; margin-bottom:20px; }
+.department-leader{
+  display:grid;
+  grid-template-columns:84px 1fr;
+  gap:18px;
+  align-items:center;
+  padding-top:18px;
+  border-top:1px solid var(--line);
+}
+.department-leader-photo img{
   width:100%;
   aspect-ratio:1/1;
   object-fit:cover;
   border:2px solid var(--ink);
   border-radius:50%;
 }
-.department-photo .ph{ aspect-ratio:1/1; border-radius:50%; }
-.department-photo .ph::after{ border-radius:999px; }
-.department-body h3{
-  font-size:clamp(1.5rem, 2.6vw, 2.1rem);
-  margin-bottom:.3em;
+.department-leader-photo .ph{ aspect-ratio:1/1; border-radius:50%; }
+.department-leader-photo .ph::after{ border-radius:999px; font-size:.6rem; padding:3px 6px; }
+.department-leader-body h4{
+  font-family:var(--font-body);
+  font-weight:700;
+  font-size:1rem;
+  margin:0 0 .25em;
 }
-.department-body p{ color:#444; margin-bottom:0; }
+.department-leader-body p{ margin:0; color:#444; font-size:.92rem; }
 
 /* ---------- About / staff ---------- */
 .staff-card{
@@ -651,8 +662,8 @@ footer.site-foot{
   .signup input[type=email]{ border-right:2px solid var(--ink); }
 }
 @media (max-width: 640px){
-  .leadership-row, .department-row{ grid-template-columns:1fr; }
-  .leadership-photo, .department-photo{ max-width:200px; margin:0 auto; }
+  .leadership-row{ grid-template-columns:1fr; }
+  .leadership-photo{ max-width:200px; margin:0 auto; }
 }
 @media (max-width: 560px){
   .grid.cols-3, .grid.cols-4, .grid.cols-2{ grid-template-columns:1fr; }
