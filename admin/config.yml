@@ -44,6 +44,23 @@ collections:
             fields:
               - {label: "Role", name: "role", widget: "string"}
               - {label: "Name", name: "name", widget: "string"}
+          - label: "Newsroom Leadership (Editor-in-Chief, Assistant Editor, Teacher)"
+            name: "leadership"
+            widget: "list"
+            summary: "{{name}} — {{role}}"
+            fields:
+              - {label: "Role (e.g. Editor-in-Chief)", name: "role", widget: "string"}
+              - {label: "Name", name: "name", widget: "string"}
+              - {label: "Photo", name: "photo", widget: "image", required: false}
+              - {label: "Description", name: "description", widget: "text"}
+          - label: "Our Departments (6 sections)"
+            name: "departments"
+            widget: "list"
+            summary: "{{title}}"
+            fields:
+              - {label: "Department name", name: "title", widget: "string"}
+              - {label: "Photo of the person in charge", name: "photo", widget: "image", required: false}
+              - {label: "Description", name: "description", widget: "text"}
 
   - name: "newsletter"
     label: "Newsletter Page"
