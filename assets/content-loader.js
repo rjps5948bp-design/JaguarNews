@@ -57,6 +57,25 @@
       <div class="ph r-1-1" data-label="PHOTO"></div>
       <p class="role">${esc(m.role)}</p>
       <h3>${esc(m.name)}</h3>`,
+    "leadership-row": (p) => `
+      <div class="leadership-photo">
+        ${p.photo ? `<img src="${esc(p.photo)}" alt="${esc(p.name || "")}">`
+                   : `<div class="ph r-1-1" data-label="PHOTO"></div>`}
+      </div>
+      <div class="leadership-body">
+        <p class="role">${esc(p.role)}</p>
+        <h3>${esc(p.name)}</h3>
+        <p>${esc(p.description)}</p>
+      </div>`,
+    "department-row": (d) => `
+      <div class="department-photo">
+        ${d.photo ? `<img src="${esc(d.photo)}" alt="${esc(d.title || "")}">`
+                   : `<div class="ph r-3-1" data-label="PHOTO"></div>`}
+      </div>
+      <div class="department-body">
+        <h3>${esc(d.title)}</h3>
+        <p>${esc(d.description)}</p>
+      </div>`,
     "issue-row": (i) => `
       <span><strong>Issue No. ${esc(i.number)}</strong> — ${esc(i.title)}</span>
       <span class="issue-date">${esc(i.date)}</span>`,
