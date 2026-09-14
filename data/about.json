@@ -16,5 +16,57 @@
       "role": "Podcast Host",
       "name": "Student Name"
     }
+  ],
+  "leadership": [
+    {
+      "role": "Editor-in-Chief",
+      "name": "Student Name",
+      "photo": "",
+      "description": "Placeholder description of the Editor-in-Chief — their role on staff and a short background."
+    },
+    {
+      "role": "Assistant Editor",
+      "name": "Student Name",
+      "photo": "",
+      "description": "Placeholder description of the Assistant Editor — their role on staff and a short background."
+    },
+    {
+      "role": "Teacher / Advisor",
+      "name": "Teacher Name",
+      "photo": "",
+      "description": "Placeholder description of the teacher advising the program — their background and role."
+    }
+  ],
+  "departments": [
+    {
+      "title": "Placeholder Department Name",
+      "photo": "",
+      "description": "Placeholder description of the person in charge of this department."
+    },
+    {
+      "title": "Placeholder Department Name",
+      "photo": "",
+      "description": "Placeholder description of the person in charge of this department."
+    },
+    {
+      "title": "Placeholder Department Name",
+      "photo": "",
+      "description": "Placeholder description of the person in charge of this department."
+    },
+    {
+      "title": "Placeholder Department Name",
+      "photo": "",
+      "description": "Placeholder description of the person in charge of this department."
+    },
+    {
+      "title": "Placeholder Department Name",
+      "photo": "",
+      "description": "Placeholder description of the person in charge of this department."
+    },
+    {
+      "title": "Placeholder Department Name",
+      "photo": "",
+      "description": "Placeholder description of the person in charge of this department."
+    }
   ]
 }
