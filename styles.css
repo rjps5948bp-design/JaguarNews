@@ -561,8 +561,8 @@ section.block.alt{ background:var(--white); border-top:1px solid var(--line); bo
 .department-desc{ color:#444; margin-bottom:20px; }
 .department-leader{
   display:grid;
-  grid-template-columns:84px 1fr;
-  gap:18px;
+  grid-template-columns:120px 1fr;
+  gap:20px;
   align-items:center;
   padding-top:18px;
   border-top:1px solid var(--line);
@@ -576,6 +576,12 @@ section.block.alt{ background:var(--white); border-top:1px solid var(--line); bo
 }
 .department-leader-photo .ph{ aspect-ratio:1/1; border-radius:50%; }
 .department-leader-photo .ph::after{ border-radius:999px; font-size:.6rem; padding:3px 6px; }
+.department-leader-body .role{
+  color:var(--purple);
+  font-weight:700;
+  font-size:.8rem;
+  margin-bottom:.2em;
+}
 .department-leader-body h4{
   font-family:var(--font-body);
   font-weight:700;
