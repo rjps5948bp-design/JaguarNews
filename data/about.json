@@ -6,26 +6,26 @@
   "leadership": [
     {
       "role": "Editor-in-Chief",
-      "name": "Student Name",
+      "name": "Amariz Rangel",
       "photo": "",
-      "description": "Placeholder description of the Editor-in-Chief \u2014 their role on staff and a short background."
+      "description": "Placeholder description of the Editor-in-Chief — their role on staff and a short background."
     },
     {
       "role": "Assistant Editor",
-      "name": "Student Name",
+      "name": "Eileen Santoyo",
       "photo": "",
-      "description": "Placeholder description of the Assistant Editor \u2014 their role on staff and a short background."
+      "description": "Placeholder description of the Assistant Editor — their role on staff and a short background."
     },
     {
-      "role": "Teacher / Advisor",
-      "name": "Teacher Name",
+      "role": "Advisor",
+      "name": "Vanessa Loke",
       "photo": "",
-      "description": "Placeholder description of the teacher advising the program \u2014 their background and role."
+      "description": "Placeholder description of the teacher advising the program — their background and role."
     }
   ],
   "departments": [
     {
-      "title": "Placeholder Department Name",
+      "title": "Reporting for High School",
       "description": "Placeholder description of what this department covers and produces.",
       "leader_photo": "",
       "leader_title": "Head of Placeholder",
@@ -33,7 +33,7 @@
       "leader_bio": "Placeholder short description of the department leader."
     },
     {
-      "title": "Placeholder Department Name",
+      "title": "Reporting for Middle School",
       "description": "Placeholder description of what this department covers and produces.",
       "leader_photo": "",
       "leader_title": "Head of Placeholder",
@@ -41,7 +41,7 @@
       "leader_bio": "Placeholder short description of the department leader."
     },
     {
-      "title": "Placeholder Department Name",
+      "title": "Podcasts",
       "description": "Placeholder description of what this department covers and produces.",
       "leader_photo": "",
       "leader_title": "Head of Placeholder",
@@ -49,7 +49,7 @@
       "leader_bio": "Placeholder short description of the department leader."
     },
     {
-      "title": "Placeholder Department Name",
+      "title": "Photography",
       "description": "Placeholder description of what this department covers and produces.",
       "leader_photo": "",
       "leader_title": "Head of Placeholder",
@@ -57,7 +57,7 @@
       "leader_bio": "Placeholder short description of the department leader."
     },
     {
-      "title": "Placeholder Department Name",
+      "title": "Videoraphy",
       "description": "Placeholder description of what this department covers and produces.",
       "leader_photo": "",
       "leader_title": "Head of Placeholder",
@@ -65,7 +65,7 @@
       "leader_bio": "Placeholder short description of the department leader."
     },
     {
-      "title": "Placeholder Department Name",
+      "title": "Writing",
       "description": "Placeholder description of what this department covers and produces.",
       "leader_photo": "",
       "leader_title": "Head of Placeholder",
