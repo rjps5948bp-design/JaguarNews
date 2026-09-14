@@ -55,6 +55,7 @@ collections:
               - {label: "Department name", name: "title", widget: "string"}
               - {label: "Department description", name: "description", widget: "text"}
               - {label: "Leader's photo", name: "leader_photo", widget: "image", required: false}
+              - {label: "Leader's title (e.g. Head of Writing)", name: "leader_title", widget: "string"}
               - {label: "Leader's name", name: "leader_name", widget: "string"}
               - {label: "Leader's short description", name: "leader_bio", widget: "text"}
 
