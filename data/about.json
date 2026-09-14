@@ -3,20 +3,6 @@
   "mission": "Dummy text describing why the program exists and who it serves.",
   "how_we_report": "Dummy text describing the class's reporting process, from pitch to publish.",
   "get_involved": "Dummy text inviting students to pitch a story, or send a tip.",
-  "team": [
-    {
-      "role": "Editor-in-Chief",
-      "name": "Student Name"
-    },
-    {
-      "role": "Managing Editor",
-      "name": "Student Name"
-    },
-    {
-      "role": "Podcast Host",
-      "name": "Student Name"
-    }
-  ],
   "leadership": [
     {
       "role": "Editor-in-Chief",
