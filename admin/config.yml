@@ -119,9 +119,18 @@ collections:
         file: "data/gallery.json"
         fields:
           - {label: "Intro paragraph", name: "lede", widget: "text"}
-          - label: "Photos"
-            name: "photos"
+          - label: "Topics (albums)"
+            name: "topics"
             widget: "list"
+            summary: "{{title}}"
             fields:
-              - {label: "Photo", name: "image", widget: "image", required: false}
-              - {label: "Caption", name: "caption", widget: "string"}
+              - {label: "ID (letters, numbers, dashes only — no spaces, must be unique, e.g. graduacion-2026)", name: "id", widget: "string"}
+              - {label: "Topic title", name: "title", widget: "string"}
+              - {label: "Cover photo (shown on the main gallery page)", name: "cover", widget: "image", required: false}
+              - {label: "Description (shown when hovering over the cover)", name: "description", widget: "text"}
+              - label: "Photos in this topic"
+                name: "photos"
+                widget: "list"
+                fields:
+                  - {label: "Photo", name: "image", widget: "image", required: false}
+                  - {label: "Caption", name: "caption", widget: "string"}
