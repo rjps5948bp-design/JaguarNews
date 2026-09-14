@@ -103,6 +103,8 @@ collections:
         fields:
           - {label: "Intro paragraph", name: "lede", widget: "text"}
           - {label: "Featured video (paste a YouTube link)", name: "featured_video_url", widget: "string", required: false}
+          - {label: "Featured video title", name: "featured_video_title", widget: "string", required: false}
+          - {label: "Featured video description", name: "featured_video_description", widget: "text", required: false}
           - label: "Videos"
             name: "videos"
             widget: "list"
