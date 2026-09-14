@@ -26,33 +26,45 @@
   "departments": [
     {
       "title": "Placeholder Department Name",
-      "photo": "",
-      "description": "Placeholder description of the person in charge of this department."
+      "description": "Placeholder description of what this department covers and produces.",
+      "leader_photo": "",
+      "leader_name": "Student Name",
+      "leader_bio": "Placeholder short description of the department leader."
     },
     {
       "title": "Placeholder Department Name",
-      "photo": "",
-      "description": "Placeholder description of the person in charge of this department."
+      "description": "Placeholder description of what this department covers and produces.",
+      "leader_photo": "",
+      "leader_name": "Student Name",
+      "leader_bio": "Placeholder short description of the department leader."
     },
     {
       "title": "Placeholder Department Name",
-      "photo": "",
-      "description": "Placeholder description of the person in charge of this department."
+      "description": "Placeholder description of what this department covers and produces.",
+      "leader_photo": "",
+      "leader_name": "Student Name",
+      "leader_bio": "Placeholder short description of the department leader."
     },
     {
       "title": "Placeholder Department Name",
-      "photo": "",
-      "description": "Placeholder description of the person in charge of this department."
+      "description": "Placeholder description of what this department covers and produces.",
+      "leader_photo": "",
+      "leader_name": "Student Name",
+      "leader_bio": "Placeholder short description of the department leader."
     },
     {
       "title": "Placeholder Department Name",
-      "photo": "",
-      "description": "Placeholder description of the person in charge of this department."
+      "description": "Placeholder description of what this department covers and produces.",
+      "leader_photo": "",
+      "leader_name": "Student Name",
+      "leader_bio": "Placeholder short description of the department leader."
     },
     {
       "title": "Placeholder Department Name",
-      "photo": "",
-      "description": "Placeholder description of the person in charge of this department."
+      "description": "Placeholder description of what this department covers and produces.",
+      "leader_photo": "",
+      "leader_name": "Student Name",
+      "leader_bio": "Placeholder short description of the department leader."
     }
   ]
 }
