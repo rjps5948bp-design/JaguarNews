@@ -5,10 +5,22 @@
    cards, rendered with the matching template below).
    If the fetch fails (e.g. opened as a local file:// page),
    the HTML's own placeholder text stays put — nothing breaks.
+
+   Special case: the "gallery-topic" page doesn't have its own
+   data/gallery-topic.json — it reads data/gallery.json, finds
+   the topic whose "id" matches ?id= in the URL, and treats that
+   one topic object as the page's data (so data-field="title",
+   data-field="description" and data-list="photos" all just work).
    ============================================================ */
 (function () {
   const page = document.body.dataset.page;
   if (!page) return;
+
+  const isGalleryTopic = page === "gallery-topic";
+  const requestedTopicId = isGalleryTopic
+    ? new URLSearchParams(window.location.search).get("id")
+    : null;
+  const dataUrl = isGalleryTopic ? "data/gallery.json" : `data/${page}.json`;
 
   // turns a pasted YouTube URL (any common format) or a bare video ID into an embed URL
   function youtubeEmbedUrl(input) {
@@ -78,6 +90,18 @@
       ${p.image ? `<img src="${esc(p.image)}" alt="${esc(p.caption || "")}" style="width:100%;display:block;border-bottom:1.5px solid #1b1b1b">`
                  : `<div class="ph r-4-3" data-label="PHOTO 800×600"></div>`}
       <figcaption>${esc(p.caption)}</figcaption>`,
+    "gallery-topic-card": (t) => `
+      <div class="gtc-cover">
+        ${t.cover ? `<img src="${esc(t.cover)}" alt="${esc(t.title || "")}">`
+                   : `<div class="ph r-4-3" data-label="PHOTO 800×600"></div>`}
+      </div>
+      <div class="gtc-title"><h3>${esc(t.title)}</h3></div>
+      <div class="gtc-preview">
+        ${t.cover ? `<img src="${esc(t.cover)}" alt="${esc(t.title || "")}">`
+                   : `<div class="ph r-4-3" data-label="PHOTO 800×600"></div>`}
+        <p>${esc(t.description)}</p>
+        <span class="gtc-cta">Ver todas las fotos →</span>
+      </div>`,
   };
 
   function esc(str) {
@@ -86,9 +110,19 @@
     return d.innerHTML;
   }
 
-  fetch(`data/${page}.json`, { cache: "no-store" })
+  fetch(dataUrl, { cache: "no-store" })
     .then((r) => (r.ok ? r.json() : Promise.reject()))
-    .then((data) => {
+    .then((raw) => {
+      let data = raw;
+
+      // gallery-topic: narrow the full gallery.json down to just the requested topic
+      if (isGalleryTopic) {
+        const topics = Array.isArray(raw.topics) ? raw.topics : [];
+        const topic = topics.find((t) => t.id === requestedTopicId);
+        if (!topic) return Promise.reject();
+        data = topic;
+      }
+
       // simple text fields
       document.querySelectorAll("[data-field]").forEach((el) => {
         const key = el.dataset.field;
@@ -115,12 +149,21 @@
         items.forEach((item) => {
           const card = document.createElement(el.dataset.itemTag || "div");
           card.className = el.dataset.itemClass || "";
+          // optional: build a link href from the item's own fields, e.g.
+          // data-item-href="gallery-topic.html?id={id}" -> replaces {id} with item.id
+          if (el.dataset.itemHref) {
+            const href = el.dataset.itemHref.replace(/\{(\w+)\}/g, (_, k) =>
+              encodeURIComponent(item[k] ?? "")
+            );
+            card.setAttribute("href", href);
+          }
           card.innerHTML = templates[tpl](item);
           el.appendChild(card);
         });
       });
     })
     .catch(() => {
-      /* offline or local file — keep the static placeholder content already in the HTML */
+      /* offline, local file, or (for gallery-topic) an unknown ?id= —
+         keep the static placeholder content already in the HTML */
     });
 })();
