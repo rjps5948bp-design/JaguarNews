@@ -1,0 +1,49 @@
+{
+  "lede": "Placeholder intro: a running album of campus moments captured by the Jaguar News photo desk.",
+  "topics": [
+    {
+      "id": "graduacion-2026",
+      "title": "Graduación 2026",
+      "cover": "/JaguarNews/assets/uploads/DSC_0399.JPG",
+      "description": "Placeholder description: a short summary of this topic that appears in the preview window when you hover over the cover photo.",
+      "photos": [
+        {
+          "image": "/JaguarNews/assets/uploads/DSC_0399.JPG",
+          "caption": "Placeholder caption describing the photo and photographer credit."
+        },
+        {
+          "image": "/JaguarNews/assets/uploads/DSC_0299.JPG",
+          "caption": "Placeholder caption describing the photo and photographer credit."
+        }
+      ]
+    },
+    {
+      "id": "topico-2",
+      "title": "Placeholder Topic Title",
+      "cover": "",
+      "description": "Placeholder description for this topic.",
+      "photos": [
+        {
+          "image": "",
+          "caption": "Placeholder caption describing the photo and photographer credit."
+        },
+        {
+          "image": "",
+          "caption": "Placeholder caption describing the photo and photographer credit."
+        }
+      ]
+    },
+    {
+      "id": "topico-3",
+      "title": "Placeholder Topic Title",
+      "cover": "",
+      "description": "Placeholder description for this topic.",
+      "photos": [
+        {
+          "image": "",
+          "caption": "Placeholder caption describing the photo and photographer credit."
+        }
+      ]
+    }
+  ]
+}
