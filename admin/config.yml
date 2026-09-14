@@ -38,12 +38,6 @@ collections:
           - {label: "Our mission", name: "mission", widget: "text"}
           - {label: "How we report", name: "how_we_report", widget: "text"}
           - {label: "Get involved", name: "get_involved", widget: "text"}
-          - label: "Team (4 cards)"
-            name: "team"
-            widget: "list"
-            fields:
-              - {label: "Role", name: "role", widget: "string"}
-              - {label: "Name", name: "name", widget: "string"}
           - label: "Newsroom Leadership (Editor-in-Chief, Assistant Editor, Teacher)"
             name: "leadership"
             widget: "list"
