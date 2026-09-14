@@ -579,7 +579,7 @@ section.block.alt{ background:var(--white); border-top:1px solid var(--line); bo
 .department-leader-body .role{
   color:var(--purple);
   font-weight:700;
-  font-size:.8rem;
+  font-size:1rem;
   margin-bottom:.2em;
 }
 .department-leader-body h4{
