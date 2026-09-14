@@ -35,8 +35,8 @@
   function videoEmbedHtml(url, label) {
     const embed = youtubeEmbedUrl(url);
     if (embed) {
-      return `<div class="ph r-16-9" style="border:2px solid var(--ink,#1b1b1b);padding:0;overflow:hidden">
-        <iframe style="width:100%;height:100%;border:0" src="${embed}"
+      return `<div class="video-embed">
+        <iframe src="${embed}"
           title="${esc(label || 'Video')}" allowfullscreen
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"></iframe>
       </div>`;
@@ -133,8 +133,8 @@
         const key = el.dataset.embed;
         const embed = youtubeEmbedUrl(data[key]);
         if (embed) {
-          el.outerHTML = `<div class="ph r-16-9" style="border:2px solid var(--ink,#1b1b1b);padding:0;overflow:hidden;margin-bottom:40px">
-            <iframe style="width:100%;height:100%;border:0" src="${embed}" title="Featured video" allowfullscreen
+          el.outerHTML = `<div class="video-embed featured-video-player">
+            <iframe src="${embed}" title="Featured video" allowfullscreen
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"></iframe>
           </div>`;
         }
