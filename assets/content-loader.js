@@ -76,6 +76,7 @@
                             : `<div class="ph r-1-1" data-label="PHOTO"></div>`}
         </div>
         <div class="department-leader-body">
+          <p class="role">${esc(d.leader_title)}</p>
           <h4>${esc(d.leader_name)}</h4>
           <p>${esc(d.leader_bio)}</p>
         </div>
