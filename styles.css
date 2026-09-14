@@ -233,6 +233,7 @@ nav.masthead-nav a.active{ background:var(--ink); color:var(--white); }
 .ph.r-4-3{ aspect-ratio:4/3; }
 .ph.r-1-1{ aspect-ratio:1/1; }
 .ph.r-3-2{ aspect-ratio:3/2; }
+.ph.r-3-1{ aspect-ratio:3/1; }
 
 /* ---------- Video embed (YouTube iframe) ----------
    Same frame look as .ph, but WITHOUT the ::after label pill —
@@ -522,6 +523,45 @@ section.block.alt{ background:var(--white); border-top:1px solid var(--line); bo
   color:#444;
 }
 
+/* ---------- About page: Leadership (photo left, description right) ---------- */
+.leadership-list{ display:flex; flex-direction:column; gap:22px; }
+.leadership-row{
+  display:grid;
+  grid-template-columns:180px 1fr;
+  gap:26px;
+  align-items:center;
+  border:1.5px solid var(--ink);
+  background:var(--white);
+  padding:22px;
+}
+.leadership-photo img{
+  width:100%;
+  aspect-ratio:1/1;
+  object-fit:cover;
+  border:1.5px solid var(--ink);
+}
+.leadership-photo .ph{ aspect-ratio:1/1; }
+.leadership-body .role{ color:var(--purple); font-weight:700; font-size:.85rem; margin-bottom:.3em; }
+.leadership-body h3{ margin-bottom:.35em; }
+.leadership-body p:last-child{ margin-bottom:0; color:#444; }
+
+/* ---------- About page: Our Departments (photo top, description below) ---------- */
+.department-list{ display:flex; flex-direction:column; gap:22px; }
+.department-row{
+  border:1.5px solid var(--ink);
+  background:var(--white);
+}
+.department-photo{ border-bottom:1.5px solid var(--ink); }
+.department-photo img{
+  width:100%;
+  aspect-ratio:3/1;
+  object-fit:cover;
+  display:block;
+}
+.department-body{ padding:20px 24px 24px; }
+.department-body h3{ margin-bottom:.35em; }
+.department-body p{ color:#444; margin-bottom:0; }
+
 /* ---------- About / staff ---------- */
 .staff-card{
   text-align:center;
@@ -598,6 +638,10 @@ footer.site-foot{
   .photo-grid{ columns:2; }
   .signup form{ flex-direction:column; }
   .signup input[type=email]{ border-right:2px solid var(--ink); }
+}
+@media (max-width: 640px){
+  .leadership-row{ grid-template-columns:1fr; }
+  .leadership-photo{ max-width:200px; margin:0 auto; }
 }
 @media (max-width: 560px){
   .grid.cols-3, .grid.cols-4, .grid.cols-2{ grid-template-columns:1fr; }
