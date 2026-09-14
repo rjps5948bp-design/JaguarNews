@@ -68,13 +68,17 @@
         <p>${esc(p.description)}</p>
       </div>`,
     "department-row": (d) => `
-      <div class="department-photo">
-        ${d.photo ? `<img src="${esc(d.photo)}" alt="${esc(d.title || "")}">`
-                   : `<div class="ph r-1-1" data-label="PHOTO"></div>`}
-      </div>
-      <div class="department-body">
-        <h3>${esc(d.title)}</h3>
-        <p>${esc(d.description)}</p>
+      <h3>${esc(d.title)}</h3>
+      <p class="department-desc">${esc(d.description)}</p>
+      <div class="department-leader">
+        <div class="department-leader-photo">
+          ${d.leader_photo ? `<img src="${esc(d.leader_photo)}" alt="${esc(d.leader_name || "")}">`
+                            : `<div class="ph r-1-1" data-label="PHOTO"></div>`}
+        </div>
+        <div class="department-leader-body">
+          <h4>${esc(d.leader_name)}</h4>
+          <p>${esc(d.leader_bio)}</p>
+        </div>
       </div>`,
     "issue-row": (i) => `
       <span><strong>Issue No. ${esc(i.number)}</strong> — ${esc(i.title)}</span>
