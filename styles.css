@@ -297,6 +297,31 @@ section.block.alt{ background:var(--white); border-top:1px solid var(--line); bo
 }
 .card .read-more{ font-weight:700; font-size:.9rem; }
 
+/* ---------- Articles: whole card is a link, grows slightly on hover ---------- */
+a.card{ text-decoration:none; color:inherit; }
+.article-card{
+  position:relative;
+  cursor:pointer;
+  transition:transform .18s ease, box-shadow .18s ease;
+}
+.article-card:hover,
+.article-card:focus-visible{
+  transform:scale(1.035);
+  box-shadow:0 14px 30px rgba(0,0,0,.18);
+  z-index:2;
+}
+
+/* ---------- Single article page ---------- */
+.article-photo{
+  width:100%;
+  aspect-ratio:3/2;
+  object-fit:cover;
+  border:2px solid var(--ink);
+  display:block;
+  margin-bottom:28px;
+}
+.article-body p{ font-size:1.05rem; color:#333; margin-bottom:1.2em; }
+
 /* pill filters */
 .filters{ display:flex; flex-wrap:wrap; gap:10px; margin-bottom:32px; }
 .filters button{

@@ -40,14 +40,19 @@
   <section class="block">
     <div class="wrap">
       <div class="filters">
-        <button class="is-on">All</button>
-        <button>News</button>
-        <button>Opinion</button>
-        <button>Features</button>
-        <button>Culture</button>
+        <button class="is-on" data-filter="all">All</button>
+        <button data-filter="News">News</button>
+        <button data-filter="Opinion">Opinion</button>
+        <button data-filter="Features">Features</button>
+        <button data-filter="Culture">Culture</button>
       </div>
-      <div class="grid cols-3" data-list="articles" data-template="article-card" data-item-tag="div" data-item-class="card">
-        <div class="card">
+      <div class="grid cols-3"
+           data-list="articles"
+           data-template="article-card"
+           data-item-tag="a"
+           data-item-class="card article-card"
+           data-item-href="article.html?id={id}">
+        <a class="card article-card" href="article.html?id=school-board-decision" data-category="News">
           <div class="ph r-3-2" data-label="IMAGE 600×400"></div>
           <div class="card-body">
             <p class="card-meta">News</p>
@@ -55,17 +60,17 @@
             <p>Dummy excerpt text summarizing the placeholder article in a sentence or two, ready to be swapped for real reporting.</p>
             <p class="byline" style="margin-bottom:0">Staff Writer<span class="dot">·</span>Sept 2026</p>
           </div>
-        </div>
-        <div class="card">
+        </a>
+        <a class="card article-card" href="article.html?id=home-opener-recap" data-category="News">
           <div class="ph r-3-2" data-label="IMAGE 600×400"></div>
           <div class="card-body">
-            <p class="card-meta">Sports</p>
+            <p class="card-meta">News</p>
             <h3>Placeholder headline recapping the Jaguars' home opener</h3>
             <p>Dummy excerpt text summarizing the placeholder article in a sentence or two, ready to be swapped for real reporting.</p>
             <p class="byline" style="margin-bottom:0">Staff Writer<span class="dot">·</span>Sept 2026</p>
           </div>
-        </div>
-        <div class="card">
+        </a>
+        <a class="card article-card" href="article.html?id=later-start-times" data-category="Opinion">
           <div class="ph r-3-2" data-label="IMAGE 600×400"></div>
           <div class="card-body">
             <p class="card-meta">Opinion</p>
@@ -73,8 +78,8 @@
             <p>Dummy excerpt text summarizing the placeholder article in a sentence or two, ready to be swapped for real reporting.</p>
             <p class="byline" style="margin-bottom:0">Staff Writer<span class="dot">·</span>Sept 2026</p>
           </div>
-        </div>
-        <div class="card">
+        </a>
+        <a class="card article-card" href="article.html?id=new-teacher-profile" data-category="Features">
           <div class="ph r-3-2" data-label="IMAGE 600×400"></div>
           <div class="card-body">
             <p class="card-meta">Features</p>
@@ -82,8 +87,8 @@
             <p>Dummy excerpt text summarizing the placeholder article in a sentence or two, ready to be swapped for real reporting.</p>
             <p class="byline" style="margin-bottom:0">Staff Writer<span class="dot">·</span>Sept 2026</p>
           </div>
-        </div>
-        <div class="card">
+        </a>
+        <a class="card article-card" href="article.html?id=construction-update" data-category="News">
           <div class="ph r-3-2" data-label="IMAGE 600×400"></div>
           <div class="card-body">
             <p class="card-meta">News</p>
@@ -91,8 +96,8 @@
             <p>Dummy excerpt text summarizing the placeholder article in a sentence or two, ready to be swapped for real reporting.</p>
             <p class="byline" style="margin-bottom:0">Staff Writer<span class="dot">·</span>Sept 2026</p>
           </div>
-        </div>
-        <div class="card">
+        </a>
+        <a class="card article-card" href="article.html?id=fall-play-review" data-category="Culture">
           <div class="ph r-3-2" data-label="IMAGE 600×400"></div>
           <div class="card-body">
             <p class="card-meta">Culture</p>
@@ -100,7 +105,7 @@
             <p>Dummy excerpt text summarizing the placeholder article in a sentence or two, ready to be swapped for real reporting.</p>
             <p class="byline" style="margin-bottom:0">Staff Writer<span class="dot">·</span>Sept 2026</p>
           </div>
-        </div>
+        </a>
       </div>
     </div>
   </section>
