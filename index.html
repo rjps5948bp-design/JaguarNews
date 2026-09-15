@@ -54,34 +54,39 @@
         </div>
         <a href="articles.html" class="btn outline">View all articles</a>
       </div>
-      <div class="grid cols-3" data-list="stories" data-template="story-card" data-item-tag="div" data-item-class="card">
-        <div class="card">
+      <div class="grid cols-3"
+           data-list="stories"
+           data-template="story-card"
+           data-item-tag="a"
+           data-item-class="card article-card"
+           data-item-href="article.html?id={id}">
+        <a class="card article-card" href="article.html?id=fall-sports-season" data-category="Sports">
           <div class="ph r-3-2" data-label="IMAGE 600×400"></div>
           <div class="card-body">
             <p class="card-meta">Sports</p>
             <h3>Placeholder headline about the fall sports season</h3>
             <p>Dummy content: short excerpt goes here summarizing the article in two sentences of placeholder text.</p>
-            <a href="articles.html" class="read-more">Read more →</a>
+            <span class="read-more">Read more →</span>
           </div>
-        </div>
-        <div class="card">
+        </a>
+        <a class="card article-card" href="article.html?id=student-opinion-piece" data-category="Opinion">
           <div class="ph r-3-2" data-label="IMAGE 600×400"></div>
           <div class="card-body">
             <p class="card-meta">Opinion</p>
             <h3>Placeholder headline about a student opinion piece</h3>
             <p>Dummy content: short excerpt goes here summarizing the article in two sentences of placeholder text.</p>
-            <a href="articles.html" class="read-more">Read more →</a>
+            <span class="read-more">Read more →</span>
           </div>
-        </div>
-        <div class="card">
+        </a>
+        <a class="card article-card" href="article.html?id=student-club-feature" data-category="Features">
           <div class="ph r-3-2" data-label="IMAGE 600×400"></div>
           <div class="card-body">
             <p class="card-meta">Features</p>
             <h3>Placeholder headline about a student or club feature</h3>
             <p>Dummy content: short excerpt goes here summarizing the article in two sentences of placeholder text.</p>
-            <a href="articles.html" class="read-more">Read more →</a>
+            <span class="read-more">Read more →</span>
           </div>
-        </div>
+        </a>
       </div>
     </div>
   </section>

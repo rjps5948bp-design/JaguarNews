@@ -295,7 +295,7 @@ section.block.alt{ background:var(--white); border-top:1px solid var(--line); bo
   color:var(--purple);
   margin-bottom:.5em;
 }
-.card .read-more{ font-weight:700; font-size:.9rem; }
+.card .read-more{ font-weight:700; font-size:.9rem; color:var(--purple); }
 
 /* ---------- Articles: whole card is a link, grows slightly on hover ---------- */
 a.card{ text-decoration:none; color:inherit; }
