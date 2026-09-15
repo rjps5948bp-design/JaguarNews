@@ -54,12 +54,13 @@
 
   const templates = {
     "story-card": (s) => `
-      <div class="ph r-3-2" data-label="IMAGE 600×400"></div>
+      ${s.photo ? `<img src="${esc(s.photo)}" alt="${esc(s.title || "")}" style="width:100%;aspect-ratio:3/2;object-fit:cover;display:block;border-bottom:1.5px solid #1b1b1b">`
+                 : `<div class="ph r-3-2" data-label="IMAGE 600×400"></div>`}
       <div class="card-body">
         <p class="card-meta">${esc(s.category)}</p>
         <h3>${esc(s.title)}</h3>
         <p>${esc(s.excerpt)}</p>
-        <a href="articles.html" class="read-more">Read more →</a>
+        <span class="read-more">Read more →</span>
       </div>`,
     "team-card": (m) => `
       <div class="ph r-1-1" data-label="PHOTO"></div>
