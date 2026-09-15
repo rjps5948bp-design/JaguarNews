@@ -2,9 +2,12 @@
   "lede": "Placeholder intro: every story from the Jaguar News desk, filed under News, Opinion, Features, and Culture.",
   "articles": [
     {
+      "id": "school-board-decision",
       "category": "News",
       "title": "Placeholder headline about a school board decision",
-      "excerpt": "Dummy excerpt text summarizing the placeholder article in a sentence or two, ready to be swapped for real reporting."
+      "excerpt": "Dummy excerpt text summarizing the placeholder article in a sentence or two, ready to be swapped for real reporting.",
+      "photo": "",
+      "body": "Placeholder full article body text. Replace this in the CMS with the real reporting.\n\nStart a new paragraph on a new line in the editor and it will show up as its own paragraph here."
     }
   ]
 }
