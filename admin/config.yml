@@ -103,10 +103,17 @@ collections:
           - label: "Articles"
             name: "articles"
             widget: "list"
+            summary: "{{title}}"
             fields:
-              - {label: "Category", name: "category", widget: "string"}
+              - {label: "ID (letters, numbers, dashes only — no spaces, must be unique)", name: "id", widget: "string"}
+              - label: "Category"
+                name: "category"
+                widget: "select"
+                options: ["News", "Opinion", "Features", "Culture"]
               - {label: "Title", name: "title", widget: "string"}
-              - {label: "Excerpt", name: "excerpt", widget: "text"}
+              - {label: "Excerpt (shown on the articles grid)", name: "excerpt", widget: "text"}
+              - {label: "Photo", name: "photo", widget: "image", required: false}
+              - {label: "Full article text (start a new paragraph on a new line)", name: "body", widget: "text"}
 
   - name: "videos"
     label: "Videos Page"
