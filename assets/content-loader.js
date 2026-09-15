@@ -17,10 +17,18 @@
   if (!page) return;
 
   const isGalleryTopic = page === "gallery-topic";
+  const isArticle = page === "article";
   const requestedTopicId = isGalleryTopic
     ? new URLSearchParams(window.location.search).get("id")
     : null;
-  const dataUrl = isGalleryTopic ? "data/gallery.json" : `data/${page}.json`;
+  const requestedArticleId = isArticle
+    ? new URLSearchParams(window.location.search).get("id")
+    : null;
+  const dataUrl = isGalleryTopic
+    ? "data/gallery.json"
+    : isArticle
+    ? "data/articles.json"
+    : `data/${page}.json`;
 
   // turns a pasted YouTube URL (any common format) or a bare video ID into an embed URL
   function youtubeEmbedUrl(input) {
@@ -97,7 +105,8 @@
       </div>
       <a href="#" class="btn outline">Listen</a>`,
     "article-card": (a) => `
-      <div class="ph r-3-2" data-label="IMAGE 600×400"></div>
+      ${a.photo ? `<img src="${esc(a.photo)}" alt="${esc(a.title || "")}" style="width:100%;aspect-ratio:3/2;object-fit:cover;display:block;border-bottom:1.5px solid #1b1b1b">`
+                 : `<div class="ph r-3-2" data-label="IMAGE 600×400"></div>`}
       <div class="card-body">
         <p class="card-meta">${esc(a.category)}</p>
         <h3>${esc(a.title)}</h3>
@@ -134,6 +143,38 @@
     return d.innerHTML;
   }
 
+  // turns plain text with blank-line-separated paragraphs into <p> tags
+  function paragraphsHtml(text) {
+    if (!text) return "";
+    return String(text)
+      .split(/\n+/)
+      .map((p) => p.trim())
+      .filter(Boolean)
+      .map((p) => `<p>${esc(p)}</p>`)
+      .join("");
+  }
+
+  // wires up the category filter buttons on the Articles page (a no-op on
+  // any other page, since it bails out if it can't find both elements)
+  function wireArticleFilters() {
+    const grid = document.querySelector('[data-list="articles"]');
+    const filterBar = document.querySelector(".filters");
+    if (!grid || !filterBar) return;
+    const buttons = filterBar.querySelectorAll("button[data-filter]");
+    buttons.forEach((btn) => {
+      btn.addEventListener("click", () => {
+        buttons.forEach((b) => b.classList.remove("is-on"));
+        btn.classList.add("is-on");
+        const filter = btn.dataset.filter;
+        Array.from(grid.children).forEach((card) => {
+          const show = filter === "all" || card.dataset.category === filter;
+          card.style.display = show ? "" : "none";
+        });
+      });
+    });
+  }
+  wireArticleFilters();
+
   fetch(dataUrl, { cache: "no-store" })
     .then((r) => (r.ok ? r.json() : Promise.reject()))
     .then((raw) => {
@@ -145,6 +186,14 @@
         const topic = topics.find((t) => t.id === requestedTopicId);
         if (!topic) return Promise.reject();
         data = topic;
+      }
+
+      // article: narrow the full articles.json down to just the requested article
+      if (isArticle) {
+        const articles = Array.isArray(raw.articles) ? raw.articles : [];
+        const article = articles.find((a) => a.id === requestedArticleId);
+        if (!article) return Promise.reject();
+        data = article;
       }
 
       // simple text fields
@@ -163,6 +212,23 @@
           </div>`;
         }
       });
+      // long-form text field rendered as one <p> per line (e.g. an article body)
+      document.querySelectorAll("[data-richtext]").forEach((el) => {
+        const key = el.dataset.richtext;
+        if (data[key] != null) el.innerHTML = paragraphsHtml(data[key]);
+      });
+      // single image field that replaces the placeholder box when a real photo exists
+      document.querySelectorAll("[data-image]").forEach((el) => {
+        const key = el.dataset.image;
+        const url = data[key];
+        if (url) {
+          const img = document.createElement("img");
+          img.src = url;
+          img.alt = data.title || "";
+          img.className = "article-photo";
+          el.replaceWith(img);
+        }
+      });
       // repeating lists
       document.querySelectorAll("[data-list]").forEach((el) => {
         const key = el.dataset.list;
@@ -173,6 +239,7 @@
         items.forEach((item) => {
           const card = document.createElement(el.dataset.itemTag || "div");
           card.className = el.dataset.itemClass || "";
+          if (item.category) card.dataset.category = item.category;
           // optional: build a link href from the item's own fields, e.g.
           // data-item-href="gallery-topic.html?id={id}" -> replaces {id} with item.id
           if (el.dataset.itemHref) {
