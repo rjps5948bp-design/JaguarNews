@@ -22,10 +22,13 @@ collections:
           - label: "Latest Stories (3 cards)"
             name: "stories"
             widget: "list"
+            summary: "{{title}}"
             fields:
+              - {label: "Article ID (must match the ID of a real article on the Articles page)", name: "id", widget: "string"}
               - {label: "Category", name: "category", widget: "string"}
               - {label: "Title", name: "title", widget: "string"}
               - {label: "Excerpt", name: "excerpt", widget: "text"}
+              - {label: "Photo", name: "photo", widget: "image", required: false}
 
   - name: "about"
     label: "About Us Page"
