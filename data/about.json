@@ -6,7 +6,7 @@
   "leadership": [
     {
       "role": "Editor-in-Chief",
-      "name": "Amariz Rangel",
+      "name": "Ashlynn Hochstadt",
       "photo": "",
       "description": "Placeholder description of the Editor-in-Chief — their role on staff and a short background."
     },
@@ -18,7 +18,7 @@
     },
     {
       "role": "Advisor",
-      "name": "Vanessa Loke",
+      "name": "Jade Carpenter",
       "photo": "",
       "description": "Placeholder description of the teacher advising the program — their background and role."
     }
@@ -26,7 +26,7 @@
   "departments": [
     {
       "title": "Reporting for High School",
-      "description": "Placeholder description of what this department covers and produces.",
+      "description": "placeholder",
       "leader_photo": "",
       "leader_title": "Head of Placeholder",
       "leader_name": "Student Name",
