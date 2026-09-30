@@ -71,6 +71,14 @@
       "leader_title": "Head of Placeholder",
       "leader_name": "Student Name",
       "leader_bio": "Placeholder short description of the department leader."
+    },
+    {
+      "title": "Website Design and Programming",
+      "description": "Our Design and Programming team is in charge of making the website etc...",
+      "leader_photo": "",
+      "leader_title": "Head of Programming",
+      "leader_name": "Nicolas Garcia",
+      "leader_bio": "Nicolas Garcia is an avid photographer and programmer."
     }
   ]
 }
