@@ -104,7 +104,9 @@
           <span style="font-size:.8rem;color:#666">00:00 / ${esc(e.length)}</span>
         </div>
       </div>
-      <a href="#" class="btn outline">Listen</a>`,
+      ${e.youtube_url
+        ? `<button type="button" class="btn outline" data-youtube-popup="${esc(e.youtube_url)}">Listen</button>`
+        : `<button type="button" class="btn outline" disabled style="opacity:.5;cursor:not-allowed">Listen</button>`}`,
     "article-card": (a) => `
       ${a.photo ? `<img src="${esc(a.photo)}" alt="${esc(a.title || "")}" style="width:100%;aspect-ratio:3/2;object-fit:cover;display:block;border-bottom:1.5px solid #1b1b1b">`
                  : `<div class="ph r-3-2" data-label="IMAGE 600×400"></div>`}
@@ -155,26 +157,96 @@
       .join("");
   }
 
-  // wires up the category filter buttons on the Articles page (a no-op on
-  // any other page, since it bails out if it can't find both elements)
-  function wireArticleFilters() {
-    const grid = document.querySelector('[data-list="articles"]');
+  // wires up category filter buttons on any page that has a ".filters" bar
+  // immediately followed by the data-list it should filter (Articles' grid,
+  // Podcast's episode list, or any future page built the same way) — a no-op
+  // if a page has no .filters bar at all
+  function wireFilterButtons() {
     const filterBar = document.querySelector(".filters");
-    if (!grid || !filterBar) return;
+    if (!filterBar) return;
+    let list = filterBar.nextElementSibling;
+    while (list && !list.hasAttribute("data-list")) list = list.nextElementSibling;
+    if (!list) return;
     const buttons = filterBar.querySelectorAll("button[data-filter]");
     buttons.forEach((btn) => {
       btn.addEventListener("click", () => {
         buttons.forEach((b) => b.classList.remove("is-on"));
         btn.classList.add("is-on");
         const filter = btn.dataset.filter;
-        Array.from(grid.children).forEach((card) => {
+        Array.from(list.children).forEach((card) => {
           const show = filter === "all" || card.dataset.category === filter;
           card.style.display = show ? "" : "none";
         });
       });
     });
   }
-  wireArticleFilters();
+  wireFilterButtons();
+
+  // ---- YouTube pop-up (used by the Podcast page's "Listen" button) ----
+  function ensureVideoModal() {
+    let modal = document.getElementById("video-modal-overlay");
+    if (modal) return modal;
+    modal = document.createElement("div");
+    modal.id = "video-modal-overlay";
+    modal.className = "video-modal-overlay";
+    modal.innerHTML = `
+      <div class="video-modal">
+        <button type="button" class="video-modal-close" aria-label="Close">&times;</button>
+        <div class="video-modal-body"></div>
+      </div>`;
+    modal.addEventListener("click", (e) => {
+      if (e.target === modal) closeVideoModal();
+    });
+    modal.querySelector(".video-modal-close").addEventListener("click", closeVideoModal);
+    document.body.appendChild(modal);
+    return modal;
+  }
+  function openVideoModal(url) {
+    const embed = youtubeEmbedUrl(url);
+    if (!embed) return;
+    const modal = ensureVideoModal();
+    modal.querySelector(".video-modal-body").innerHTML = `
+      <div class="video-embed">
+        <iframe src="${embed}" title="Episode video" allowfullscreen
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"></iframe>
+      </div>`;
+    modal.classList.add("is-open");
+    document.body.style.overflow = "hidden";
+  }
+  function closeVideoModal() {
+    const modal = document.getElementById("video-modal-overlay");
+    if (!modal) return;
+    modal.classList.remove("is-open");
+    modal.querySelector(".video-modal-body").innerHTML = ""; // stop playback
+    document.body.style.overflow = "";
+  }
+  document.addEventListener("click", (e) => {
+    const btn = e.target.closest("[data-youtube-popup]");
+    if (!btn) return;
+    e.preventDefault();
+    if (btn.dataset.youtubePopup) openVideoModal(btn.dataset.youtubePopup);
+  });
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape") closeVideoModal();
+  });
+
+  // site-wide settings (currently just the contact email) — loaded separately
+  // so it applies to every page's footer, regardless of which page this is
+  fetch("data/site.json", { cache: "no-store" })
+    .then((r) => (r.ok ? r.json() : Promise.reject()))
+    .then((site) => {
+      document.querySelectorAll("[data-mailto]").forEach((el) => {
+        const key = el.dataset.mailto;
+        const email = site[key];
+        if (email) {
+          el.href = `mailto:${email}`;
+          el.textContent = email;
+        }
+      });
+    })
+    .catch(() => {
+      /* keep the static placeholder email already in the HTML */
+    });
 
   fetch(dataUrl, { cache: "no-store" })
     .then((r) => (r.ok ? r.json() : Promise.reject()))
