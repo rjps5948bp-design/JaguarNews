@@ -44,11 +44,21 @@
           <h2>Never miss an issue</h2>
           <p style="color:#1b1b1b">Enter your email for weekly News, Articles, Videos, and more!</p>
         </div>
-        <form onsubmit="return false;">
-          <input type="email" placeholder="name@student.edu" aria-label="Email address">
+        <form
+          action="https://buttondown.com/api/emails/embed-subscribe/nicomg2023"
+          method="post"
+          target="popupwindow"
+          onsubmit="window.open('https://buttondown.com/nicomg2023', 'popupwindow')"
+          class="embeddable-buttondown-form"
+        >
+          <input type="email" name="email" placeholder="name@student.edu" aria-label="Email address" required>
+          <input type="hidden" value="1" name="embed">
           <button type="submit" class="btn">Sign up</button>
         </form>
       </div>
+      <p style="font-size:.78rem;color:#555;margin-top:10px">
+        <a href="https://buttondown.com" target="_blank" rel="noopener">Powered by Buttondown</a>
+      </p>
     </div>
   </section>
 
@@ -93,7 +103,7 @@
         <ul>
           <li><a href="about.html">About Us</a></li>
           <li><a href="newsletter.html">Newsletter Signup</a></li>
-          <li><a href="mailto:JaguarNewsLM@learningchoice.org">JaguarNewsLM@learningchoice.org</a></li>
+          <li><a href="mailto:JaguarNewsLM@learningchoice.org" data-mailto="contact_email">JaguarNewsLM@learningchoice.org</a></li>
           <li><a href="#">Room 312, TLC La Mesa</a></li>
         </ul>
       </div>
