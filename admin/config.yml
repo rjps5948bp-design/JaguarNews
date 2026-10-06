@@ -8,6 +8,15 @@ media_folder: "assets/uploads"
 public_folder: "/JaguarNews/assets/uploads"
 
 collections:
+  - name: "site"
+    label: "Site Settings"
+    files:
+      - name: "site"
+        label: "Site Settings"
+        file: "data/site.json"
+        fields:
+          - {label: "Contact email (shown in every page's footer)", name: "contact_email", widget: "string"}
+
   - name: "home"
     label: "Home Page"
     files:
@@ -89,11 +98,17 @@ collections:
           - label: "Episodes"
             name: "episodes"
             widget: "list"
+            summary: "{{title}}"
             fields:
               - {label: "Episode number", name: "number", widget: "string"}
+              - label: "Category"
+                name: "category"
+                widget: "select"
+                options: ["News", "Opinion", "Features", "Culture"]
               - {label: "Title", name: "title", widget: "string"}
               - {label: "Description", name: "description", widget: "text"}
               - {label: "Length (e.g. 24 min)", name: "length", widget: "string"}
+              - {label: "YouTube link (opens in a pop-up when someone clicks Listen)", name: "youtube_url", widget: "string", required: false}
 
   - name: "articles"
     label: "Articles Page"
