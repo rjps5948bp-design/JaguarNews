@@ -3,9 +3,11 @@
   "episodes": [
     {
       "number": "1",
+      "category": "News",
       "title": "Placeholder episode title",
       "description": "Placeholder description of what this episode covers",
-      "length": "-- min"
+      "length": "-- min",
+      "youtube_url": ""
     }
   ]
 }
