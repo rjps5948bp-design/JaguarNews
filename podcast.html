@@ -34,11 +34,6 @@
       <div class="tag-strip"><span class="tag green">On Air</span></div>
       <h1>Jaguar Talks</h1>
       <p class="lede" data-field="lede">Placeholder show description: a student-hosted podcast covering campus news, interviews, and the occasional off-topic tangent — new episodes dropping every other Thursday.</p>
-      <div class="subscribe-row">
-        <a href="#" class="btn">Apple Podcasts</a>
-        <a href="#" class="btn outline">Spotify</a>
-        <a href="#" class="btn outline">RSS Feed</a>
-      </div>
     </div>
   </section>
 
@@ -50,8 +45,15 @@
           <h2>Latest episodes</h2>
         </div>
       </div>
+      <div class="filters">
+        <button class="is-on" data-filter="all">All</button>
+        <button data-filter="News">News</button>
+        <button data-filter="Opinion">Opinion</button>
+        <button data-filter="Features">Features</button>
+        <button data-filter="Culture">Culture</button>
+      </div>
       <div data-list="episodes" data-template="episode-row" data-item-tag="div" data-item-class="episode">
-      <div class="episode">
+      <div class="episode" data-category="News">
         <div class="ep-num">12</div>
         <div>
           <h3>Placeholder episode title about the new student council</h3>
@@ -62,9 +64,9 @@
             <span style="font-size:.8rem;color:#666">00:00 / 24 min</span>
           </div>
         </div>
-        <a href="#" class="btn outline">Listen</a>
+        <button type="button" class="btn outline" data-youtube-popup="">Listen</button>
       </div>
-      <div class="episode">
+      <div class="episode" data-category="Features">
         <div class="ep-num">11</div>
         <div>
           <h3>Placeholder episode title interviewing a school coach</h3>
@@ -75,9 +77,9 @@
             <span style="font-size:.8rem;color:#666">00:00 / 31 min</span>
           </div>
         </div>
-        <a href="#" class="btn outline">Listen</a>
+        <button type="button" class="btn outline" data-youtube-popup="">Listen</button>
       </div>
-      <div class="episode">
+      <div class="episode" data-category="Culture">
         <div class="ep-num">10</div>
         <div>
           <h3>Placeholder episode title recapping the first week back</h3>
@@ -88,7 +90,7 @@
             <span style="font-size:.8rem;color:#666">00:00 / 19 min</span>
           </div>
         </div>
-        <a href="#" class="btn outline">Listen</a>
+        <button type="button" class="btn outline" data-youtube-popup="">Listen</button>
       </div>
       </div>
     </div>
@@ -118,7 +120,7 @@
         <ul>
           <li><a href="about.html">About Us</a></li>
           <li><a href="newsletter.html">Newsletter Signup</a></li>
-          <li><a href="mailto:jaguarnews@placeholder.edu">jaguarnews@placeholder.edu</a></li>
+          <li><a href="mailto:jaguarnews@placeholder.edu" data-mailto="contact_email">jaguarnews@placeholder.edu</a></li>
           <li><a href="#">Room 312, TLC La Mesa</a></li>
         </ul>
       </div>

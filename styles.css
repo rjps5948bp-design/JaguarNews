@@ -235,6 +235,52 @@ nav.masthead-nav a.active{ background:var(--ink); color:var(--white); }
 .ph.r-3-2{ aspect-ratio:3/2; }
 .ph.r-3-1{ aspect-ratio:3/1; }
 
+/* ---------- YouTube pop-up (Podcast page "Listen" button) ---------- */
+.video-modal-overlay{
+  position:fixed;
+  inset:0;
+  background:rgba(27,27,27,.78);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:24px;
+  z-index:1000;
+  opacity:0;
+  visibility:hidden;
+  pointer-events:none;
+  transition:opacity .15s ease;
+}
+.video-modal-overlay.is-open{
+  opacity:1;
+  visibility:visible;
+  pointer-events:auto;
+}
+.video-modal{
+  position:relative;
+  width:min(720px, 100%);
+  background:var(--white);
+  border:2px solid var(--ink);
+  padding:18px;
+}
+.video-modal-close{
+  position:absolute;
+  top:-16px;
+  right:-16px;
+  width:36px;
+  height:36px;
+  border-radius:50%;
+  border:2px solid var(--ink);
+  background:var(--green);
+  font-size:1.4rem;
+  line-height:1;
+  font-family:var(--font-body);
+  cursor:pointer;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+.video-modal-body .video-embed{ margin:0; }
+
 /* ---------- Video embed (YouTube iframe) ----------
    Same frame look as .ph, but WITHOUT the ::after label pill —
    that pill is what showed up as a stray empty bar next to real videos. */
