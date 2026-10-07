@@ -71,7 +71,7 @@ p{ margin:0 0 1em; }
 
 /* ---------- Masthead ---------- */
 .masthead{
-  background:var(--cyan);
+  background:var(--cyan-dark);
   border-bottom:4px solid var(--ink);
 }
 .masthead-bar{
