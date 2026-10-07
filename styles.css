@@ -133,8 +133,8 @@ nav.masthead-nav a.active{ background:var(--ink); color:var(--white); }
   height:10px;
 }
 .ribbon span{ flex:1; }
-.ribbon span:nth-child(2){ background:var(--purple); }
-.ribbon span:nth-child(1){ background:var(--cyan); }
+.ribbon span:nth-child(1){ background:var(--purple); }
+.ribbon span:nth-child(2){ background:var(--cyan); }
 .ribbon span:nth-child(3){ background:var(--green); }
 
 /* ---------- Page header band ---------- */
