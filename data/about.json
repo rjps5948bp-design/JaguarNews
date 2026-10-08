@@ -28,8 +28,8 @@
       "title": "Reporting for High School",
       "description": "placeholder",
       "leader_photo": "",
-      "leader_title": "Head of Placeholder",
-      "leader_name": "Student Name",
+      "leader_title": "Head of High School Reporting",
+      "leader_name": "Wesley Harris",
       "leader_bio": "Placeholder short description of the department leader."
     },
     {
@@ -74,11 +74,11 @@
     },
     {
       "title": "Website Design and Programming",
-      "description": "Our Design and Programming team is in charge of making the website etc...",
+      "description": "Our Design and Programming team is in charge of the website design and building. They maintain it and manage the content being published.",
       "leader_photo": "",
       "leader_title": "Head of Programming",
       "leader_name": "Nicolas Garcia",
-      "leader_bio": "Nicolas Garcia is an avid photographer and programmer."
+      "leader_bio": "Nicolas Garcia is an avid photographer and traveler who always tries to take up a challenge. He made the website alongside the lead of design Kyleigh Murphy. He is a longtime student of TLC and even plans to graduate early! \n\nFavorite quote\n\"And this I believe: that the free, exploring mind of the individual human is the most valuable thing in the world.\" - John Steinbeck (East of Eden)"
     }
   ]
 }
