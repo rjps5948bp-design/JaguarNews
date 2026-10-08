@@ -40,13 +40,20 @@
     return id ? `https://www.youtube.com/embed/${id}` : null;
   }
 
-  function videoEmbedHtml(url, label) {
+  // renders a video: a YouTube link wins if present, otherwise an uploaded
+  // video file (plays with the browser's own player), otherwise the placeholder
+  function videoEmbedHtml(url, label, fileUrl) {
     const embed = youtubeEmbedUrl(url);
     if (embed) {
       return `<div class="video-embed">
         <iframe src="${embed}"
           title="${esc(label || 'Video')}" allowfullscreen
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"></iframe>
+      </div>`;
+    }
+    if (fileUrl) {
+      return `<div class="video-embed">
+        <video controls preload="metadata" playsinline src="${esc(fileUrl)}" title="${esc(label || 'Video')}"></video>
       </div>`;
     }
     return `<div class="ph r-16-9" data-label="VIDEO THUMBNAIL"></div>`;
@@ -114,10 +121,10 @@
         <p class="card-meta">${esc(a.category)}</p>
         <h3>${esc(a.title)}</h3>
         <p>${esc(a.excerpt)}</p>
-        <p class="byline" style="margin-bottom:0">Staff Writer<span class="dot">·</span>Sept 2026</p>
+        <p class="byline" style="margin-bottom:0">${bylineHtml(a.author, a.date)}</p>
       </div>`,
     "video-card": (v) => `
-      ${videoEmbedHtml(v.youtube_url, v.title)}
+      ${videoEmbedHtml(v.youtube_url, v.title, v.video_file)}
       <div class="card-body">
         <h3>${esc(v.title)}</h3>
         <p class="byline" style="margin-bottom:0">${esc(v.length)}<span class="dot">·</span>Sept 2026</p>
@@ -155,6 +162,15 @@
       .filter(Boolean)
       .map((p) => `<p>${esc(p)}</p>`)
       .join("");
+  }
+
+  // "Author · Date" byline; falls back to "Staff Writer" if no author is set,
+  // and simply leaves the date off if there isn't one
+  function bylineHtml(author, date) {
+    return [author || "Staff Writer", date]
+      .filter(Boolean)
+      .map(esc)
+      .join('<span class="dot">·</span>');
   }
 
   // wires up category filter buttons on any page that has a ".filters" bar
@@ -232,7 +248,7 @@
 
   // site-wide settings (currently just the contact email) — loaded separately
   // so it applies to every page's footer, regardless of which page this is
-  fetch("data/site.json", { cache: "no-store" })
+  const sitePromise = fetch("data/site.json", { cache: "no-store" })
     .then((r) => (r.ok ? r.json() : Promise.reject()))
     .then((site) => {
       document.querySelectorAll("[data-mailto]").forEach((el) => {
@@ -248,7 +264,7 @@
       /* keep the static placeholder email already in the HTML */
     });
 
-  fetch(dataUrl, { cache: "no-store" })
+  const pagePromise = fetch(dataUrl, { cache: "no-store" })
     .then((r) => (r.ok ? r.json() : Promise.reject()))
     .then((raw) => {
       let data = raw;
@@ -278,12 +294,21 @@
       document.querySelectorAll("[data-embed]").forEach((el) => {
         const key = el.dataset.embed;
         const embed = youtubeEmbedUrl(data[key]);
+        const fileUrl = el.dataset.embedFile ? data[el.dataset.embedFile] : null;
         if (embed) {
           el.outerHTML = `<div class="video-embed featured-video-player">
             <iframe src="${embed}" title="Featured video" allowfullscreen
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"></iframe>
           </div>`;
+        } else if (fileUrl) {
+          el.outerHTML = `<div class="video-embed featured-video-player">
+            <video controls preload="metadata" playsinline src="${esc(fileUrl)}" title="Featured video"></video>
+          </div>`;
         }
+      });
+      // "Author · Date" line (e.g. on the single-article page)
+      document.querySelectorAll("[data-byline]").forEach((el) => {
+        el.innerHTML = bylineHtml(data.author, data.date);
       });
       // long-form text field rendered as one <p> per line (e.g. an article body)
       document.querySelectorAll("[data-richtext]").forEach((el) => {
@@ -330,4 +355,11 @@
       /* offline, local file, or (for gallery-topic) an unknown ?id= —
          keep the static placeholder content already in the HTML */
     });
+
+  // both chains above always resolve (they catch their own errors), so this
+  // runs whether loading worked or not — styles.css keeps the data-driven bits
+  // invisible until then, so placeholders never flash on screen
+  Promise.all([sitePromise, pagePromise]).then(() => {
+    document.body.classList.add("cms-ready");
+  });
 })();
