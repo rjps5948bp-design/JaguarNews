@@ -69,9 +69,19 @@ p{ margin:0 0 1em; }
 }
 .eyebrow-tri svg{ width:14px; height:12px; flex:none; }
 
+/* ---------- No placeholder flash ----------
+   Anything filled in from the CMS stays invisible (but keeps its space, so
+   nothing jumps) until content-loader.js adds .cms-ready to <body>.
+   Safety net: if the loader never finishes, everything reveals itself after 3s. */
+@keyframes cms-reveal{ to{ visibility:visible; } }
+body:not(.cms-ready) :is([data-field],[data-list],[data-embed],[data-richtext],[data-image],[data-byline],[data-mailto]){
+  visibility:hidden;
+  animation:cms-reveal 0s linear 3s forwards;
+}
+
 /* ---------- Masthead ---------- */
 .masthead{
-  background:var(--cyan-dark);
+  background:var(--cyan);
   border-bottom:4px solid var(--ink);
 }
 .masthead-bar{
@@ -90,8 +100,8 @@ p{ margin:0 0 1em; }
   margin-right:auto;
 }
 .masthead-brand img{
-  width:125px;
-  height:125px;
+  width:64px;
+  height:64px;
   border-radius:50%;
   background:var(--white);
   border:2px solid var(--ink);
@@ -133,8 +143,8 @@ nav.masthead-nav a.active{ background:var(--ink); color:var(--white); }
   height:10px;
 }
 .ribbon span{ flex:1; }
-.ribbon span:nth-child(1){ background:var(--purple); }
-.ribbon span:nth-child(2){ background:var(--cyan); }
+.ribbon span:nth-child(1){ background:var(--cyan); }
+.ribbon span:nth-child(2){ background:var(--purple); }
 .ribbon span:nth-child(3){ background:var(--green); }
 
 /* ---------- Page header band ---------- */
@@ -291,12 +301,15 @@ nav.masthead-nav a.active{ background:var(--ink); color:var(--white); }
   border:2px solid var(--ink);
   overflow:hidden;
 }
-.video-embed iframe{
+.video-embed iframe,
+.video-embed video{
   display:block;
   width:100%;
   height:100%;
   border:0;
+  background:#000;
 }
+.video-embed video{ object-fit:contain; }
 
 /* ---------- Featured video (videos page top) ---------- */
 .featured-video{
