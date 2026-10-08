@@ -134,6 +134,16 @@ collections:
               - {label: "Excerpt (shown on the articles grid)", name: "excerpt", widget: "text"}
               - {label: "Photo", name: "photo", widget: "image", required: false}
               - {label: "Full article text (start a new paragraph on a new line)", name: "body", widget: "text"}
+              - label: "Article font (the typeface of the article text)"
+                name: "font"
+                widget: "select"
+                required: false
+                default: "default"
+                options:
+                  - {label: "Default (Work Sans, same as the site)", value: "default"}
+                  - {label: "Serif (Lora)", value: "serif"}
+                  - {label: "Classic (Libre Baskerville)", value: "classic"}
+                  - {label: "Typewriter (Courier Prime)", value: "typewriter"}
 
   - name: "videos"
     label: "Videos Page"
