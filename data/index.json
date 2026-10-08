@@ -5,11 +5,11 @@
   "lede": "TLC La Mesa invites the very first Journalism class to its site! This class etc. Placeholder",
   "stories": [
     {
-      "id": "nico-nobel-prize",
-      "category": "Features",
-      "title": "Placeholder headline about a student or club feature",
+      "id": "school-food",
+      "category": "Culture",
+      "title": "School Food",
       "excerpt": "Dummy content: short excerpt goes here summarizing the article in two sentences of placeholder text.",
-      "photo": "/JaguarNews/assets/uploads/DSC_0399.JPG"
+      "photo": "/JaguarNews/assets/uploads/images (2).jpeg"
     }
   ]
 }
