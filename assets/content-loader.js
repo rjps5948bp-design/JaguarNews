@@ -19,6 +19,7 @@
   // the data for the page currently being rendered (lets list templates read
   // page-wide settings, like the gallery's editable button text)
   let currentData = null;
+  let pendingFont = null; // promise while a custom article font is still loading
   const seeMoreLabel = () => (currentData && currentData.see_more_label) || "See more photos";
 
   const isGalleryTopic = page === "gallery-topic";
@@ -291,8 +292,65 @@
     return raw;
   }
 
+  // ---- article fonts (the "Article font" dropdown in the CMS) ----
+  // Only the font an article actually uses is downloaded.
+  const ARTICLE_FONTS = {
+    serif: {
+      family: "Lora",
+      stack: "'Lora', Georgia, serif",
+      url: "https://fonts.googleapis.com/css2?family=Lora:wght@400;500;700&display=swap",
+    },
+    classic: {
+      family: "Libre Baskerville",
+      stack: "'Libre Baskerville', Georgia, serif",
+      url: "https://fonts.googleapis.com/css2?family=Libre+Baskerville:wght@400;700&display=swap",
+    },
+    typewriter: {
+      family: "Courier Prime",
+      stack: "'Courier Prime', 'Courier New', monospace",
+      url: "https://fonts.googleapis.com/css2?family=Courier+Prime:wght@400;700&display=swap",
+    },
+  };
+
+  // adds the font's stylesheet and resolves once it's ready (or after 1.5s, so a
+  // slow connection never leaves the article hidden)
+  function loadFont(f) {
+    const timeout = new Promise((res) => setTimeout(res, 1500));
+    let sheet = document.querySelector(`link[data-font="${f.family}"]`);
+    let sheetLoaded;
+    if (sheet) {
+      sheetLoaded = Promise.resolve();
+    } else {
+      sheet = document.createElement("link");
+      sheet.rel = "stylesheet";
+      sheet.href = f.url;
+      sheet.dataset.font = f.family;
+      sheetLoaded = new Promise((res) => { sheet.onload = res; sheet.onerror = res; });
+      document.head.appendChild(sheet);
+    }
+    const ready = sheetLoaded
+      .then(() => (document.fonts && document.fonts.load ? document.fonts.load(`1em "${f.family}"`) : null))
+      .catch(() => {});
+    return Promise.race([ready, timeout]);
+  }
+
+  function applyArticleFont(data) {
+    const f = isArticle ? ARTICLE_FONTS[data.font] : null;
+    if (!f) return; // "Default" (or nothing chosen): keep the site's own font
+    document.querySelectorAll(".article-body").forEach((el) => {
+      el.style.fontFamily = f.stack;
+    });
+    pendingFont = loadFont(f);
+  }
+
+  // reveals the page; for an article with a custom font, waits for the font first
+  function markReady() {
+    Promise.resolve(pendingFont).then(() => document.body.classList.add("cms-ready"));
+  }
+
   function render(data) {
     currentData = data;
+    applyArticleFont(data);
     // simple text fields
     document.querySelectorAll("[data-field]").forEach((el) => {
       const key = el.dataset.field;
@@ -380,7 +438,7 @@
   }
   // already showing real content? then there's nothing left to wait for
   if (pageFromCache !== null && (siteFromCache || !hasMailto)) {
-    document.body.classList.add("cms-ready");
+    markReady();
   }
 
   // 2) in the background, fetch the real thing
@@ -412,7 +470,5 @@
   // both chains above always resolve (they catch their own errors), so this
   // runs whether loading worked or not — styles.css keeps the data-driven bits
   // invisible until then, so placeholders never flash on screen
-  Promise.all([sitePromise, pagePromise]).then(() => {
-    document.body.classList.add("cms-ready");
-  });
+  Promise.all([sitePromise, pagePromise]).then(markReady);
 })();
