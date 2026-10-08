@@ -16,6 +16,11 @@
   const page = document.body.dataset.page;
   if (!page) return;
 
+  // the data for the page currently being rendered (lets list templates read
+  // page-wide settings, like the gallery's editable button text)
+  let currentData = null;
+  const seeMoreLabel = () => (currentData && currentData.see_more_label) || "See more photos";
+
   const isGalleryTopic = page === "gallery-topic";
   const isArticle = page === "article";
   const requestedTopicId = isGalleryTopic
@@ -139,11 +144,9 @@
                    : `<div class="ph r-4-3" data-label="PHOTO 800×600"></div>`}
       </div>
       <div class="gtc-title"><h3>${esc(t.title)}</h3></div>
-      <div class="gtc-preview">
-        ${t.cover ? `<img src="${esc(t.cover)}" alt="${esc(t.title || "")}">`
-                   : `<div class="ph r-4-3" data-label="PHOTO 800×600"></div>`}
+      <div class="gtc-more">
         <p>${esc(t.description)}</p>
-        <span class="gtc-cta">Ver todas las fotos →</span>
+        <span class="btn gtc-btn">${esc(seeMoreLabel())} →</span>
       </div>`,
   };
 
@@ -246,114 +249,164 @@
     if (e.key === "Escape") closeVideoModal();
   });
 
-  // site-wide settings (currently just the contact email) — loaded separately
-  // so it applies to every page's footer, regardless of which page this is
-  const sitePromise = fetch("data/site.json", { cache: "no-store" })
-    .then((r) => (r.ok ? r.json() : Promise.reject()))
-    .then((site) => {
-      document.querySelectorAll("[data-mailto]").forEach((el) => {
-        const key = el.dataset.mailto;
-        const email = site[key];
-        if (email) {
-          el.href = `mailto:${email}`;
-          el.textContent = email;
-        }
-      });
-    })
-    .catch(() => {
-      /* keep the static placeholder email already in the HTML */
+  // ---- remembering the last-seen content ----
+  // We save the last JSON we fetched in the browser, so on every visit after the
+  // first the page can paint real content instantly instead of waiting on the
+  // network (that wait is what used to show the placeholders for a split second).
+  function readCache(key) {
+    try { return localStorage.getItem(key); } catch (e) { return null; }
+  }
+  function writeCache(key, text) {
+    try { localStorage.setItem(key, text); } catch (e) { /* blocked or full — fine */ }
+  }
+  // "no-cache" = always ask the server if it changed, but get a fast 304 if not
+  function fetchJson(url) {
+    return fetch(url, { cache: "no-cache" }).then((r) => (r.ok ? r.json() : Promise.reject()));
+  }
+
+  // ---- site-wide settings (currently just the contact email) ----
+  function applySite(site) {
+    document.querySelectorAll("[data-mailto]").forEach((el) => {
+      const key = el.dataset.mailto;
+      const email = site[key];
+      if (email) {
+        el.href = `mailto:${email}`;
+        el.textContent = email;
+      }
     });
+  }
 
-  const pagePromise = fetch(dataUrl, { cache: "no-store" })
-    .then((r) => (r.ok ? r.json() : Promise.reject()))
+  // ---- page content ----
+  // gallery-topic / article pages only want ONE entry out of the big file;
+  // returns null if that entry doesn't exist
+  function resolveData(raw) {
+    if (isGalleryTopic) {
+      const topics = Array.isArray(raw.topics) ? raw.topics : [];
+      return topics.find((t) => t.id === requestedTopicId) || null;
+    }
+    if (isArticle) {
+      const articles = Array.isArray(raw.articles) ? raw.articles : [];
+      return articles.find((a) => a.id === requestedArticleId) || null;
+    }
+    return raw;
+  }
+
+  function render(data) {
+    currentData = data;
+    // simple text fields
+    document.querySelectorAll("[data-field]").forEach((el) => {
+      const key = el.dataset.field;
+      if (data[key] != null) el.textContent = data[key];
+    });
+    // single embeddable field (e.g. the featured YouTube video)
+    document.querySelectorAll("[data-embed]").forEach((el) => {
+      const key = el.dataset.embed;
+      const embed = youtubeEmbedUrl(data[key]);
+      const fileUrl = el.dataset.embedFile ? data[el.dataset.embedFile] : null;
+      if (embed) {
+        el.outerHTML = `<div class="video-embed featured-video-player">
+          <iframe src="${embed}" title="Featured video" allowfullscreen
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"></iframe>
+        </div>`;
+      } else if (fileUrl) {
+        el.outerHTML = `<div class="video-embed featured-video-player">
+          <video controls preload="metadata" playsinline src="${esc(fileUrl)}" title="Featured video"></video>
+        </div>`;
+      }
+    });
+    // "Author · Date" line (e.g. on the single-article page)
+    document.querySelectorAll("[data-byline]").forEach((el) => {
+      el.innerHTML = bylineHtml(data.author, data.date);
+    });
+    // long-form text field rendered as one <p> per line (e.g. an article body)
+    document.querySelectorAll("[data-richtext]").forEach((el) => {
+      const key = el.dataset.richtext;
+      if (data[key] != null) el.innerHTML = paragraphsHtml(data[key]);
+    });
+    // single image field that replaces the placeholder box when a real photo exists
+    document.querySelectorAll("[data-image]").forEach((el) => {
+      const key = el.dataset.image;
+      const url = data[key];
+      if (url) {
+        const img = document.createElement("img");
+        img.src = url;
+        img.alt = data.title || "";
+        img.className = "article-photo";
+        el.replaceWith(img);
+      }
+    });
+    // repeating lists
+    document.querySelectorAll("[data-list]").forEach((el) => {
+      const key = el.dataset.list;
+      const tpl = el.dataset.template;
+      const items = data[key];
+      if (!Array.isArray(items) || !templates[tpl]) return;
+      el.innerHTML = "";
+      items.forEach((item) => {
+        const card = document.createElement(el.dataset.itemTag || "div");
+        card.className = el.dataset.itemClass || "";
+        if (item.category) card.dataset.category = item.category;
+        // optional: build a link href from the item's own fields, e.g.
+        // data-item-href="gallery-topic.html?id={id}" -> replaces {id} with item.id
+        if (el.dataset.itemHref) {
+          const href = el.dataset.itemHref.replace(/\{(\w+)\}/g, (_, k) =>
+            encodeURIComponent(item[k] ?? "")
+          );
+          card.setAttribute("href", href);
+        }
+        card.innerHTML = templates[tpl](item);
+        el.appendChild(card);
+      });
+    });
+  }
+
+  const siteKey = "jn:data/site.json";
+  const pageKey = "jn:" + dataUrl;
+  const hasMailto = !!document.querySelector("[data-mailto]");
+
+  // 1) paint straight from the saved copies, if we have them
+  let siteFromCache = false;
+  const cachedSite = readCache(siteKey);
+  if (cachedSite) {
+    try { applySite(JSON.parse(cachedSite)); siteFromCache = true; } catch (e) { /* ignore */ }
+  }
+  let pageFromCache = null; // the exact text we painted from (null = didn't)
+  const cachedPage = readCache(pageKey);
+  if (cachedPage) {
+    try {
+      const d = resolveData(JSON.parse(cachedPage));
+      if (d) { render(d); pageFromCache = cachedPage; }
+    } catch (e) { /* ignore */ }
+  }
+  // already showing real content? then there's nothing left to wait for
+  if (pageFromCache !== null && (siteFromCache || !hasMailto)) {
+    document.body.classList.add("cms-ready");
+  }
+
+  // 2) in the background, fetch the real thing
+  const sitePromise = fetchJson("data/site.json")
+    .then((site) => {
+      writeCache(siteKey, JSON.stringify(site));
+      applySite(site);
+    })
+    .catch(() => { /* keep whatever email is already on the page */ });
+
+  const pagePromise = fetchJson(dataUrl)
     .then((raw) => {
-      let data = raw;
-
-      // gallery-topic: narrow the full gallery.json down to just the requested topic
-      if (isGalleryTopic) {
-        const topics = Array.isArray(raw.topics) ? raw.topics : [];
-        const topic = topics.find((t) => t.id === requestedTopicId);
-        if (!topic) return Promise.reject();
-        data = topic;
+      const text = JSON.stringify(raw);
+      writeCache(pageKey, text);
+      if (pageFromCache !== null) {
+        // we already painted from the saved copy; if the content has changed
+        // since, reload once to show the new version (the next load is instant)
+        if (text !== pageFromCache) window.location.reload();
+        return;
       }
-
-      // article: narrow the full articles.json down to just the requested article
-      if (isArticle) {
-        const articles = Array.isArray(raw.articles) ? raw.articles : [];
-        const article = articles.find((a) => a.id === requestedArticleId);
-        if (!article) return Promise.reject();
-        data = article;
-      }
-
-      // simple text fields
-      document.querySelectorAll("[data-field]").forEach((el) => {
-        const key = el.dataset.field;
-        if (data[key] != null) el.textContent = data[key];
-      });
-      // single embeddable field (e.g. the featured YouTube video)
-      document.querySelectorAll("[data-embed]").forEach((el) => {
-        const key = el.dataset.embed;
-        const embed = youtubeEmbedUrl(data[key]);
-        const fileUrl = el.dataset.embedFile ? data[el.dataset.embedFile] : null;
-        if (embed) {
-          el.outerHTML = `<div class="video-embed featured-video-player">
-            <iframe src="${embed}" title="Featured video" allowfullscreen
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"></iframe>
-          </div>`;
-        } else if (fileUrl) {
-          el.outerHTML = `<div class="video-embed featured-video-player">
-            <video controls preload="metadata" playsinline src="${esc(fileUrl)}" title="Featured video"></video>
-          </div>`;
-        }
-      });
-      // "Author · Date" line (e.g. on the single-article page)
-      document.querySelectorAll("[data-byline]").forEach((el) => {
-        el.innerHTML = bylineHtml(data.author, data.date);
-      });
-      // long-form text field rendered as one <p> per line (e.g. an article body)
-      document.querySelectorAll("[data-richtext]").forEach((el) => {
-        const key = el.dataset.richtext;
-        if (data[key] != null) el.innerHTML = paragraphsHtml(data[key]);
-      });
-      // single image field that replaces the placeholder box when a real photo exists
-      document.querySelectorAll("[data-image]").forEach((el) => {
-        const key = el.dataset.image;
-        const url = data[key];
-        if (url) {
-          const img = document.createElement("img");
-          img.src = url;
-          img.alt = data.title || "";
-          img.className = "article-photo";
-          el.replaceWith(img);
-        }
-      });
-      // repeating lists
-      document.querySelectorAll("[data-list]").forEach((el) => {
-        const key = el.dataset.list;
-        const tpl = el.dataset.template;
-        const items = data[key];
-        if (!Array.isArray(items) || !templates[tpl]) return;
-        el.innerHTML = "";
-        items.forEach((item) => {
-          const card = document.createElement(el.dataset.itemTag || "div");
-          card.className = el.dataset.itemClass || "";
-          if (item.category) card.dataset.category = item.category;
-          // optional: build a link href from the item's own fields, e.g.
-          // data-item-href="gallery-topic.html?id={id}" -> replaces {id} with item.id
-          if (el.dataset.itemHref) {
-            const href = el.dataset.itemHref.replace(/\{(\w+)\}/g, (_, k) =>
-              encodeURIComponent(item[k] ?? "")
-            );
-            card.setAttribute("href", href);
-          }
-          card.innerHTML = templates[tpl](item);
-          el.appendChild(card);
-        });
-      });
+      const d = resolveData(raw);
+      if (d) render(d);
     })
     .catch(() => {
-      /* offline, local file, or (for gallery-topic) an unknown ?id= —
-         keep the static placeholder content already in the HTML */
+      /* offline, local file, or an unknown ?id= — keep the static placeholder
+         content already in the HTML */
     });
 
   // both chains above always resolve (they catch their own errors), so this
