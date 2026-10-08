@@ -129,6 +129,8 @@ collections:
                 widget: "select"
                 options: ["News", "Opinion", "Features", "Culture"]
               - {label: "Title", name: "title", widget: "string"}
+              - {label: "Author name (leave blank to show 'Staff Writer')", name: "author", widget: "string", required: false}
+              - {label: "Date (e.g. Sept 12, 2026)", name: "date", widget: "string", required: false}
               - {label: "Excerpt (shown on the articles grid)", name: "excerpt", widget: "text"}
               - {label: "Photo", name: "photo", widget: "image", required: false}
               - {label: "Full article text (start a new paragraph on a new line)", name: "body", widget: "text"}
@@ -142,6 +144,7 @@ collections:
         fields:
           - {label: "Intro paragraph", name: "lede", widget: "text"}
           - {label: "Featured video (paste a YouTube link)", name: "featured_video_url", widget: "string", required: false}
+          - {label: "Featured video FILE (optional — only used if there's no YouTube link above. Keep it small, see notes)", name: "featured_video_file", widget: "file", required: false}
           - {label: "Featured video title", name: "featured_video_title", widget: "string", required: false}
           - {label: "Featured video description", name: "featured_video_description", widget: "text", required: false}
           - label: "Videos"
@@ -151,6 +154,7 @@ collections:
               - {label: "Title", name: "title", widget: "string"}
               - {label: "Length (e.g. 3:42)", name: "length", widget: "string"}
               - {label: "YouTube link (paste the video URL)", name: "youtube_url", widget: "string", required: false}
+              - {label: "Video FILE (optional — only used if there's no YouTube link above. Keep it small, see notes)", name: "video_file", widget: "file", required: false}
 
   - name: "gallery"
     label: "Photo Gallery Page"
