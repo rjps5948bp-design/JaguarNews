@@ -81,7 +81,7 @@ body:not(.cms-ready) :is([data-field],[data-list],[data-embed],[data-richtext],[
 
 /* ---------- Masthead ---------- */
 .masthead{
-  background:var(--cyan);
+  background:var(--cyan-dark);
   border-bottom:4px solid var(--ink);
 }
 .masthead-bar{
@@ -100,8 +100,8 @@ body:not(.cms-ready) :is([data-field],[data-list],[data-embed],[data-richtext],[
   margin-right:auto;
 }
 .masthead-brand img{
-  width:64px;
-  height:64px;
+  width:120px;
+  height:120px;
   border-radius:50%;
   background:var(--white);
   border:2px solid var(--ink);
@@ -143,8 +143,8 @@ nav.masthead-nav a.active{ background:var(--ink); color:var(--white); }
   height:10px;
 }
 .ribbon span{ flex:1; }
-.ribbon span:nth-child(1){ background:var(--cyan); }
-.ribbon span:nth-child(2){ background:var(--purple); }
+.ribbon span:nth-child(2){ background:var(--cyan); }
+.ribbon span:nth-child(1){ background:var(--purple); }
 .ribbon span:nth-child(3){ background:var(--green); }
 
 /* ---------- Page header band ---------- */
