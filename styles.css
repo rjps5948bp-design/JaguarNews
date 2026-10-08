@@ -70,12 +70,16 @@ p{ margin:0 0 1em; }
 .eyebrow-tri svg{ width:14px; height:12px; flex:none; }
 
 /* ---------- No placeholder flash ----------
-   Anything filled in from the CMS stays invisible (but keeps its space, so
-   nothing jumps) until content-loader.js adds .cms-ready to <body>.
-   Safety net: if the loader never finishes, everything reveals itself after 3s. */
-@keyframes cms-reveal{ to{ visibility:visible; } }
+   Anything filled in from the CMS stays transparent (but keeps its space, so
+   nothing jumps) until content-loader.js adds .cms-ready to <body>, then it
+   fades in. Safety net: if the loader never finishes, everything reveals
+   itself after 3 seconds. */
+@keyframes cms-reveal{ to{ opacity:1; } }
+:is([data-field],[data-list],[data-embed],[data-richtext],[data-image],[data-byline],[data-mailto]){
+  transition:opacity .2s ease;
+}
 body:not(.cms-ready) :is([data-field],[data-list],[data-embed],[data-richtext],[data-image],[data-byline],[data-mailto]){
-  visibility:hidden;
+  opacity:0;
   animation:cms-reveal 0s linear 3s forwards;
 }
 
@@ -525,6 +529,8 @@ a.card{ text-decoration:none; color:inherit; }
   background:var(--white);
   color:var(--ink);
   text-decoration:none;
+  cursor:pointer;
+  transition:transform .18s ease, box-shadow .18s ease;
 }
 .gtc-cover{
   aspect-ratio:4/3;
@@ -540,48 +546,57 @@ a.card{ text-decoration:none; color:inherit; }
 .gtc-title{ padding:14px 16px 16px; }
 .gtc-title h3{ margin:0; }
 
-/* the preview panel: hidden until hover/focus, floats above the card */
-.gtc-preview{
+/* description + button: hidden until hover/focus, then drops out of the bottom of
+   the card as one continuous piece (absolute, so the grid never shifts) */
+.gtc-more{
   position:absolute;
-  left:50%;
-  bottom:calc(100% + 12px);
-  transform:translate(-50%, 6px);
-  width:min(300px, 80vw);
+  left:-1.5px;
+  right:-1.5px;
+  top:calc(100% - 1.5px);
   background:var(--white);
-  border:2px solid var(--ink);
-  padding:14px;
+  border:1.5px solid var(--ink);
+  border-top:none;
+  padding:12px 16px 16px;
+  box-shadow:inset 0 1px 0 var(--line), 0 14px 30px rgba(0,0,0,.18);
   opacity:0;
   visibility:hidden;
-  pointer-events:none;
-  transition:opacity .15s ease, transform .15s ease;
-  box-shadow:0 12px 26px rgba(0,0,0,.2);
-  z-index:30;
+  transform:translateY(-6px);
+  transition:opacity .18s ease, transform .18s ease;
 }
-.gtc-preview img,
-.gtc-preview .ph{
-  width:100%;
-  aspect-ratio:4/3;
-  object-fit:cover;
-  border:1.5px solid var(--ink);
-  margin-bottom:12px;
-}
-.gtc-preview p{
+.gtc-more p{
   font-size:.9rem;
   color:#333;
-  margin-bottom:10px;
+  margin-bottom:12px;
 }
-.gtc-cta{
-  display:inline-block;
-  font-weight:700;
-  font-size:.86rem;
-  color:var(--purple);
+.gtc-more p:empty{ display:none; }
+.gtc-btn{
+  padding:9px 16px;
+  font-size:.85rem;
 }
-.gallery-topic-card:hover .gtc-preview,
-.gallery-topic-card:focus-visible .gtc-preview{
+
+/* the grow + reveal effect: mouse only, so a tap on a phone goes straight
+   through to the topic page instead of needing two taps */
+@media (hover:hover){
+  .gallery-topic-card:hover{
+    transform:scale(1.05);
+    box-shadow:0 14px 30px rgba(0,0,0,.18);
+    z-index:5;
+  }
+  .gallery-topic-card:hover .gtc-more{
+    opacity:1;
+    visibility:visible;
+    transform:none;
+  }
+}
+.gallery-topic-card:focus-visible{
+  transform:scale(1.05);
+  box-shadow:0 14px 30px rgba(0,0,0,.18);
+  z-index:5;
+}
+.gallery-topic-card:focus-visible .gtc-more{
   opacity:1;
   visibility:visible;
-  pointer-events:auto;
-  transform:translate(-50%, 0);
+  transform:none;
 }
 
 /* ---------- Photo grid (topic sub-page: every photo in one album) ---------- */
@@ -760,7 +775,6 @@ footer.site-foot{
   .masthead-bar{ flex-direction:column; align-items:flex-start; }
   .gallery-grid{ grid-template-columns:1fr; }
   .photo-grid{ columns:1; }
-  .gtc-preview{ display:none; } /* on phones there's no hover — tap goes straight to the topic page */
   .episode{ grid-template-columns:44px 1fr; }
   .episode .subscribe-row{ grid-column:1/-1; }
 }
