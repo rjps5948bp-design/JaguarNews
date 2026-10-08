@@ -164,6 +164,7 @@ collections:
         file: "data/gallery.json"
         fields:
           - {label: "Intro paragraph", name: "lede", widget: "text"}
+          - {label: "Hover button text (e.g. See more photos)", name: "see_more_label", widget: "string", required: false}
           - label: "Topics (albums)"
             name: "topics"
             widget: "list"
