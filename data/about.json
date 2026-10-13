@@ -20,51 +20,43 @@
   "departments": [
     {
       "title": "Reporting for High School",
-      "description": "placeholder",
+      "description": "Our High School Reporting team brings informative and interactive videos about current events to those in the 9th grade and above. They use skits, interview students and staff, and report to you what they—and hopefully, you—find interesting.",
       "leader_photo": "",
       "leader_title": "Head of High School Reporting",
       "leader_name": "Wesley Harris",
-      "leader_bio": "Placeholder short description of the department leader."
+      "leader_bio": "Organizes script writing and makes sure the videographers are available to film scenes for the videos."
     },
     {
-      "title": "Reporting for Middle School",
-      "description": "Placeholder description of what this department covers and produces.",
+      "title": "Reporting for Middle & Elementary School",
+      "description": "The Middle and Elementary School Reporters plan to film fun videos that can get our middle/elementary students excited about current and upcoming events that the lower grades can participate in!",
       "leader_photo": "",
-      "leader_title": "Head of Placeholder",
-      "leader_name": "Student Name",
-      "leader_bio": "Placeholder short description of the department leader."
+      "leader_title": "Head of Reporting for Middle & Elementary School",
+      "leader_name": "Farah Kadom",
+      "leader_bio": "Oversees script writing, topics, and recording times."
     },
     {
       "title": "Podcasts",
-      "description": "Placeholder description of what this department covers and produces.",
+      "description": "Our podcasters work hard to record episodes with discussions on various relevant topics. Look out for their weekly episodes on learning and mental disabilities!",
       "leader_photo": "",
       "leader_title": "Head of Placeholder",
-      "leader_name": "Student Name",
-      "leader_bio": "Placeholder short description of the department leader."
+      "leader_name": "Annalee Hough",
+      "leader_bio": "Makes script outlines, leads discussions, and keeps episodes on track."
     },
     {
-      "title": "Photography",
-      "description": "Placeholder description of what this department covers and produces.",
+      "title": "Photography & Videography",
+      "description": "The video and photographers are very crucial to our team, as they handle all of the filming for the many scenes and videos for Jaguar News. They make the reporters’ ideal scenes come to life and take pictures of important school events.",
       "leader_photo": "",
-      "leader_title": "Head of Placeholder",
+      "leader_title": "Head of Photography & Videography",
       "leader_name": "Student Name",
-      "leader_bio": "Placeholder short description of the department leader."
-    },
-    {
-      "title": "Videoraphy",
-      "description": "Placeholder description of what this department covers and produces.",
-      "leader_photo": "",
-      "leader_title": "Head of Placeholder",
-      "leader_name": "Student Name",
-      "leader_bio": "Placeholder short description of the department leader."
+      "leader_bio": "Delegates photography shoots for school events and recording for the reporters."
     },
     {
       "title": "Writing",
-      "description": "Placeholder description of what this department covers and produces.",
+      "description": "Our writing department works hard to come up with articles about happenings both inside and outside of school to bring to those in all grade levels. They’ll write on things like fun facts, events that are happening during school, and awareness of certain topics.",
       "leader_photo": "",
-      "leader_title": "Head of Placeholder",
-      "leader_name": "Student Name",
-      "leader_bio": "Placeholder short description of the department leader."
+      "leader_title": "Head of Writing",
+      "leader_name": "Miguel Reveles-Peraza",
+      "leader_bio": "Edits and revises articles before pushing them out to the public."
     },
     {
       "title": "Website Design and Programming",
