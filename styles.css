@@ -650,7 +650,7 @@ a.card{ text-decoration:none; color:inherit; }
 .department-list{ display:flex; flex-direction:column; gap:22px; }
 .department-row{
   border:1.5px solid var(--ink);
-  background:var(--green);
+  background:var(--cyan);
   padding:26px 26px 24px;
 }
 .department-row h3{
