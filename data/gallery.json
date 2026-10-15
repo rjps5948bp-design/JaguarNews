@@ -1,19 +1,16 @@
 {
   "lede": "Placeholder intro: a running album of campus moments captured by the Jaguar News photo desk.",
+  "see_more_label": "",
   "topics": [
     {
-      "id": "graduation-2025",
-      "title": "Graduation 2025",
-      "cover": "/JaguarNews/assets/uploads/DSC_0399.JPG",
-      "description": "Placeholder description: a short summary of this topic that appears in the preview window when you hover over the cover photo.",
+      "id": "placeholder",
+      "title": "Placeholder",
+      "cover": "",
+      "description": "Placeholder",
       "photos": [
         {
-          "image": "/JaguarNews/assets/uploads/DSC_0399.JPG",
-          "caption": "Placeholder caption describing the photo and photographer credit."
-        },
-        {
-          "image": "/JaguarNews/assets/uploads/DSC_0299.JPG",
-          "caption": "Placeholder caption describing the photo and photographer credit."
+          "image": "",
+          "caption": "Placeholder"
         }
       ]
     }
