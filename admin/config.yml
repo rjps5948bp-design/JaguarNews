@@ -144,6 +144,7 @@ collections:
                   - {label: "Serif (Lora)", value: "serif"}
                   - {label: "Classic (Libre Baskerville)", value: "classic"}
                   - {label: "Typewriter (Courier Prime)", value: "typewriter"}
+                  - {label: "Playfair Display", value: "playfair-display" }
 
   - name: "videos"
     label: "Videos Page"
